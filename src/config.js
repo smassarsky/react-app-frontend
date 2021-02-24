@@ -1,5 +1,6 @@
+const baseUrl = 'http://localhost:8000'
+
 export const config = {
-  apiUrl
+  baseUrl
 }
 
-const apiUrl = 'localhost:8000'

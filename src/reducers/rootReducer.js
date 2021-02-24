@@ -1,21 +1,11 @@
 import { combineReducers } from 'redux'
+import { userReducer as user } from './userReducer'
+import { alert } from './alertReducer'
 
 const rootReducer = combineReducers({
-  user: userReducer
+  user,
+  alert
 })
 
 export default rootReducer
 
-
-function userReducer(state = [], action) {
-  switch(action.type) {
-    case 'USERS_LOGIN_REQUEST':
-      return
-    case 'USERS_LOGIN_SUCCESS':
-      return
-    case 'USERS_LOGIN_FAILURE':
-      return
-    case 'USERS_LOGOUT':
-      return
-  }
-}

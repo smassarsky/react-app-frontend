@@ -6,14 +6,23 @@ import { userActions } from '../actions/userActions'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
+import Alerts from './Alerts'
+import InputError from './InputError'
 
+import { validateLogin } from '../_validators/loginValidators'
 
 class Login extends Component {
 
-  state = {
-    username: '',
-    password: '',
-    submitted: false
+  constructor(props) {
+    super(props)
+
+    this.props.logout()
+
+    this.state = {
+      username: '',
+      password: '',
+      errors: {}
+    }
   }
 
   handleChange = (e) => {
@@ -24,8 +33,11 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.setState({ submitted: true })
-
+    const errors = validateLogin(this.state)
+    this.setState({ errors })
+    if (Object.keys(errors).length === 0) {
+      this.props.login(this.state)
+    }
   }
 
   render() {
@@ -35,16 +47,18 @@ class Login extends Component {
 
         <h3 className="mb-3 font-weight-normal">Login</h3>
 
-        <div id="error-div" className="text-danger mb-3">{this.state.errors}</div>
+        <Alerts />
 
         <Form.Group controlId="formUsername">
           <Form.Label srOnly="true">Username</Form.Label>
           <Form.Control onChange={this.handleChange} type="text" name="username" placeholder="Username" value={this.state.username} />
+          <InputError message={this.state.errors.username} />
         </Form.Group>
 
         <Form.Group controlId="formPassword">
           <Form.Label srOnly="true">Password</Form.Label>
           <Form.Control onChange={this.handleChange} type="password" name="password" placeholder="Password" value={this.state.password} />
+          <InputError message={this.state.errors.password} />
         </Form.Group>
 
         <Button variant="primary" type="submit">Login</Button>
@@ -57,11 +71,16 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => {
-
+  return {
+    loggingIn: state.user.loggingIn
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-
+  return {
+    login: (username, password) => dispatch(userActions.login(username, password)),
+    logout: () => dispatch(userActions.logout)
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
