@@ -18,10 +18,10 @@ function signup(fields) {
       .then(
         user => {
           dispatch(success(user))
+          localStorage.setItem('user', JSON.stringify(user))
           history.push('/dashboard')
         },
         error => {
-          console.log(error)
           dispatch(failure(error))
           dispatch(alertActions.error(error))
         }
@@ -42,10 +42,10 @@ function login({ username, password }) {
       .then(
         user => {
           dispatch(success(user))
+          localStorage.setItem('user', JSON.stringify(user))
           history.push('/dashboard')
         },
         error => {
-          console.log(error)
           dispatch(failure(error))
           dispatch(alertActions.error(error))
         }

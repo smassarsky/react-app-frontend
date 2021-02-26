@@ -5,14 +5,20 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 
-class NewTeamModal extends Component {
+class UpdateTeamModal extends Component {
 
   state = {
     name: ''
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.team !== this.props.team) {
+      this.setState({name: this.props.team ? this.props.team.name : ''})
+    }
+  }
+
   handleHide = () => {
-    this.setState({name: ''})
+    this.setState({ name: '' })
     this.props.hideModal()
   }
 
@@ -22,7 +28,7 @@ class NewTeamModal extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.props.createTeam(e.target.name.value)
+    this.props.updateTeam(this.state.name, this.props.team.id)
   }
 
   render() {
@@ -33,10 +39,10 @@ class NewTeamModal extends Component {
             <Form.Row>
               <Col>
                 <Form.Label srOnly='true'>Name</Form.Label>
-                <Form.Control onChange={this.handleChange} type="text" name="name" placeholder="Team Name"></Form.Control>
+                <Form.Control onChange={this.handleChange} type="text" name="name" placeholder="Team Name" value={this.state.name} ></Form.Control>
               </Col>
 
-              <Button type="submit">Create Team</Button>
+              <Button type="submit">Edit Team</Button>
             </Form.Row>
             
 
@@ -49,4 +55,4 @@ class NewTeamModal extends Component {
 
 }
 
-export default NewTeamModal
+export default UpdateTeamModal

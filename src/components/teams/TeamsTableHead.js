@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col'
 
 const TeamsTableHead = props => {
   return (
-    <Row className="border-bottom border-light font-weight-bold">
+    <Row className="my-thead">
       <Col>Name</Col>
       <Col>Owner</Col>
       <Col>Current Season</Col>

@@ -1,7 +1,7 @@
 import { userConstants } from '../constants/userConstants'
 
 let user = JSON.parse(localStorage.getItem('user'))
-const initialState = user ? { loggedIn: true, username: user.username, name: user.name } : {}
+const initialState = user ? { loggedIn: true, id: user.id, username: user.username, name: user.name } : {}
 
 export function userReducer(state = initialState, action) {
   switch(action.type) {
@@ -13,6 +13,7 @@ export function userReducer(state = initialState, action) {
     case userConstants.LOGIN_SUCCESS:
       return {
         loggedIn: true,
+        id: action.user.id,
         username: action.user.username,
         name: action.user.name
       }
@@ -23,12 +24,14 @@ export function userReducer(state = initialState, action) {
     case userConstants.SIGNUP_REQUEST:
       return {
         signingUp: true,
+        id: action.user.id,
         username: action.user.username,
         name: action.user.name
       }
     case userConstants.SIGNUP_SUCCESS:
       return {
         loggedIn: true,
+        id: action.user.id,
         username: action.user.username,
         name: action.user.name
       }

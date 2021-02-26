@@ -28,3 +28,28 @@ code {
   padding: 15px;
   margin: auto;
 }
+
+.my-table {
+  display: table;
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  border-collapse: collapse;
+}
+
+.my-thead, .my-tbody {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.my-thead > * {
+  font-weight: bold;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  padding: .5rem
+}
+
+.my-tbody > * {
+  border-top: 1px solid #dee2e6;
+  padding: .5rem;
+}

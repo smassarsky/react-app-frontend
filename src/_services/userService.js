@@ -17,13 +17,6 @@ function login(username, password) {
 
   return fetch(`${config.baseUrl}/login`, options)
   .then(handleResponse)
-  .then(user => {
-    if (user.username) {
-      localStorage.setItem('user', JSON.stringify(user))
-    }
-    return user
-  })
-  
 }
 
 function signup({ username, name, password, passwordConfirmation }) {
@@ -39,12 +32,6 @@ function signup({ username, name, password, passwordConfirmation }) {
 
   return fetch(`${config.baseUrl}/signup`, options)
   .then(handleResponse)
-  .then(user => {
-    if (user.username) {
-      localStorage.setItem('user', JSON.stringify(user))
-    }
-    return user
-  })
 }
 
 function logout() {

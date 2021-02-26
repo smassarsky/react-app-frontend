@@ -1,20 +1,23 @@
 import React from 'react'
-import TeamsTableHead from './TeamsTableHead'
-import TeamRow from './TeamRow'
+import { connect } from 'react-redux'
 
-const renderRows = teams => {
-  return (
-      teams.map(team => <TeamRow key={team.id} team={team} />)
-  )
-}
+import TeamsTableHead from './TeamsTableHead'
+import TeamsTableBody from './TeamsTableBody'
+
 
 const TeamsTable = (props) => {
   return (
-    <div className="p-3">
+    <div className="my-table">
       <TeamsTableHead />
-      {props.teams.length > 0 ? renderRows(props.teams) : <h4 className="mt-3">No Teams Yet</h4>}
+      <TeamsTableBody teams={props.teams} modals={props.modals} userId={props.userId} />
     </div>
   )
 }
 
-export default TeamsTable
+const mapStateToProps = state => {
+  return {
+    userId: state.user.id
+  }
+}
+
+export default connect(mapStateToProps)(TeamsTable)
