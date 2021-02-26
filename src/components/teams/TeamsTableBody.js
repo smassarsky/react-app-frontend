@@ -18,7 +18,7 @@ const TeamsTableBody = (props) => {
 
   function renderRow(team) {
     console.log(team)
-    return (
+    return ( 
       <Row key={team.id} className="my-tbody">
         <Col>{team.name}</Col>
         <Col>{team.owner.name}</Col>
@@ -37,7 +37,7 @@ const TeamsTableBody = (props) => {
         <Button size="sm" type="button">Show</Button>
         {team.owner.id === props.userId ?  <>
                     <Button onClick={() => props.modals.edit(team)} className="ml-3" size="sm" type="button">Edit</Button>
-                    <Button onClick={() => props.modals.delete(team)} className="ml-3" variant="danger" size="sm" type="button">Delete</Button>
+                    <Button onClick={() => props.modals.destroy(team)} className="ml-3" variant="danger" size="sm" type="button">Delete</Button>
                   </> : null}
       </>
     )
