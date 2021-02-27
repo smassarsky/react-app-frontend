@@ -9,13 +9,13 @@ export const teamService = {
 }
 
 function index() {
-  console.log('hi from teamservice index')
   return fetch(`${config.baseUrl}/teams`, {credentials: 'include'})
   .then(handleResponse)
 }
 
-function show() {
-
+function show(teamId) {
+  return fetch(`${config.baseUrl}/teams/${teamId}`, {credentials: 'include'})
+  .then(handleResponse)
 }
 
 function create(name) {
@@ -59,8 +59,6 @@ function destroy(teamId) {
   return fetch(`${config.baseUrl}/teams/${teamId}`, options)
   .then(handleResponse)
 }
-
-
 
 function handleResponse(response) {
   return response.json().then(json => {

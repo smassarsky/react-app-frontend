@@ -19,18 +19,6 @@ export function teams(state = initialState, action) {
       }
     case teamsConstants.INDEX_FAILURE:
       return initialState
-    case teamsConstants.SHOW_REQUEST:
-      return {
-        ...initialState,
-        fetching: true
-      }
-    case teamsConstants.SHOW_SUCCESS:
-      return {
-        ...state,
-        show: action.team
-      }
-    case teamsConstants.SHOW_FAILURE:
-      return initialState
     case teamsConstants.CREATE_REQUEST:
       return {
         ...state,
@@ -55,7 +43,6 @@ export function teams(state = initialState, action) {
       }
 
     case teamsConstants.UPDATE_SUCCESS:
-      console.log(state, action)
       if (state.show.id) {
         return { 
           ...initialState,

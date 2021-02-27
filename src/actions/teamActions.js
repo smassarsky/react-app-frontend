@@ -1,6 +1,7 @@
 import camelcaseKeys from 'camelcase-keys'
 
 import { teamsConstants } from '../constants'
+import { teamConstants } from '../constants'
 import { teamService } from '../_services'
 import { alertActions } from './alertActions'
 
@@ -35,7 +36,25 @@ function index() {
 }
 
 function show(teamId) {
+  return dispatch => {
+    dispatch(request())
+    dispatch(alertActions.clear())
 
+    teamService.show(teamId)
+      .then(
+        team => {
+          dispatch(success(camelcaseKeys(team)))
+        },
+        error => {
+          dispatch(failure(error))
+          dispatch(alertActions.error(error))
+        }
+      )
+  }
+
+  function request() { return { type: teamConstants.SHOW_REQUEST } }
+  function success(team) { return { type: teamConstants.SHOW_SUCCESS, team } }
+  function failure() { return { type: teamConstants.SHOW_FAILURE } }
 }
 
 function create(name) {

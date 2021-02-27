@@ -1,4 +1,5 @@
 import React from 'react'
+import { LinkContainer } from 'react-router-bootstrap'
 
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -8,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 
 
 
-const TeamsTableBody = (props) => {
+const TeamsTableBody = props => {
   console.log(props)
   return (
     <>
@@ -34,7 +35,9 @@ const TeamsTableBody = (props) => {
   function renderActions(team) {
     return (
       <>
-        <Button size="sm" type="button">Show</Button>
+        <LinkContainer to={`/teams/${team.id}`} >
+          <Button size="sm" type="button">Show</Button>
+        </LinkContainer>
         {team.owner.id === props.userId ?  <>
                     <Button onClick={() => props.modals.edit(team)} className="ml-3" size="sm" type="button">Edit</Button>
                     <Button onClick={() => props.modals.destroy(team)} className="ml-3" variant="danger" size="sm" type="button">Delete</Button>

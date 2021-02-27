@@ -50,7 +50,6 @@ class TeamsPage extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <Container fluid className="text-center">
         <TeamsHeader showNewModal={this.showNewModal} />
@@ -98,7 +97,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     index: () => dispatch(teamActions.index()),
-    show: (teamId) => dispatch(teamActions.show(teamId)),
     create: (name) => dispatch(teamActions.create(name)),
     update: (name, teamId) => dispatch(teamActions.update(name, teamId)),
     destroy: (teamId) => dispatch(teamActions.destroy(teamId))

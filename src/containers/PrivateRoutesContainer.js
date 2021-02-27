@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar'
 
 import Dashboard from '../components/Dashboard'
 import TeamsPage from '../components/teams/TeamsPage'
+import TeamShowPage from '../components/teamShow/TeamShowPage'
 
 class PrivateRoutesContainer extends Component {
 
@@ -14,7 +15,8 @@ class PrivateRoutesContainer extends Component {
         <Navbar />
         <Switch>
           <Route exact path={'/dashboard'} component={Dashboard} />
-          <Route path={'/teams'} component={TeamsPage} />
+          <Route exact path={'/teams'} component={TeamsPage} />
+          <Route exact path={'/teams/:id'} component={TeamShowPage} />
         </Switch>
       </>
     )

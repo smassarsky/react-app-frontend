@@ -35,14 +35,10 @@ class NewTeamModal extends Component {
                 <Form.Label srOnly='true'>Name</Form.Label>
                 <Form.Control onChange={this.handleChange} type="text" name="name" placeholder="Team Name"></Form.Control>
               </Col>
-
               <Button type="submit">Create Team</Button>
             </Form.Row>
-            
-
           </Form>
         </Modal.Body>
-
       </Modal>
     )
   }
