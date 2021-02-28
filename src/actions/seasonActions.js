@@ -2,7 +2,7 @@ import camelcaseKeys from 'camelcase-keys'
 
 import { teamConstants } from '../constants'
 
-import { seasonService, teamService } from '../_services'
+import { seasonService } from '../_services'
 
 import { alertActions } from './alertActions'
 
@@ -17,15 +17,15 @@ function show(seasonId) {
 
 }
 
-function create(teamId, name) {
+function create(teamId, season) {
   return dispatch => {
     dispatch(request())
     dispatch(alertActions.clear())
 
-    seasonService.create(teamId, name)
+    seasonService.create(teamId, season)
       .then(
-        season => {
-          dispatch(success(camelcaseKeys(season)))
+        newSeason => {
+          dispatch(success(camelcaseKeys(newSeason)))
           dispatch(alertActions.success("Season Created!"))
         },
         error => {
@@ -36,19 +36,19 @@ function create(teamId, name) {
   }
 
   function request() { return { type: teamConstants.CREATE_SEASON_REQUEST } }
-  function success(season) { return { type: teamConstants.CREATE_SEASON_SUCCESS, season } }
+  function success(newSeason) { return { type: teamConstants.CREATE_SEASON_SUCCESS, season: newSeason } }
   function failure() { return { type: teamConstants.CREATE_SEASON_FAILURE } }
 }
 
-function update(seasonId, name) {
+function update(season) {
   return dispatch => {
     dispatch(request())
     dispatch(alertActions.clear())
 
-    seasonService.update(seasonId, name)
+    seasonService.update(season)
       .then(
-        season => {
-          dispatch(success(camelcaseKeys(season)))
+        updatedSeason => {
+          dispatch(success(camelcaseKeys(updatedSeason)))
           dispatch(alertActions.success("Season Updated!"))
         },
         error => {
@@ -59,7 +59,7 @@ function update(seasonId, name) {
   }
 
   function request() { return { type: teamConstants.UPDATE_SEASON_REQUEST } }
-  function success(season) { return { type: teamConstants.UPDATE_SEASON_SUCCESS } }
+  function success(updatedSeason) { return { type: teamConstants.UPDATE_SEASON_SUCCESS, season: updatedSeason } }
   function failure() { return { type: teamConstants.UPDATE_SEASON_FAILURE } }
 }
 

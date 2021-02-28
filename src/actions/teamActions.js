@@ -43,7 +43,7 @@ function show(teamId) {
     teamService.show(teamId)
       .then(
         team => {
-          dispatch(success(camelcaseKeys(team)))
+          dispatch(success(camelcaseKeys(team, {deep: true})))
         },
         error => {
           dispatch(failure(error))

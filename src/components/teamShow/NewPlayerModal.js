@@ -37,6 +37,7 @@ class NewPlayerModal extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <Modal show={this.props.show} onHide={this.handleHide} centered="true">
         <Modal.Body>
@@ -70,7 +71,7 @@ class NewPlayerModal extends Component {
 
             <Form.Row>
 
-              <Form.Group as={Col} xs={4}>
+              <Form.Group as={Col} xs={4} className="mb-0">
                 <Form.Label srOnly="true">Position</Form.Label>
                 <Form.Control
                   as="select"
@@ -82,7 +83,7 @@ class NewPlayerModal extends Component {
                 </Form.Control>                
               </Form.Group>
 
-              <Form.Group as={Col} xs={4}>
+              <Form.Group as={Col} xs={4} className="mb-0">
                 <Form.Label srOnly="true">Jersey Number</Form.Label>
                 <Form.Control
                   onChange={this.handleChange}
@@ -95,7 +96,7 @@ class NewPlayerModal extends Component {
                 />                
               </Form.Group>
 
-              <Form.Group as={Col} xs={4}>
+              <Form.Group as={Col} xs={4} className="mb-0">
                 <Button type="submit" block>Create Player</Button>
               </Form.Group>
 

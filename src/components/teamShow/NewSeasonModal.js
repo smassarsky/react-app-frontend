@@ -5,24 +5,34 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 
+
+
 class NewSeasonModal extends Component {
 
   state = {
-    name: ''
+    name: '',
+    current: false
   }
 
   handleChange = e => {
     this.setState({[e.target.name]: e.target.value})
   }
 
+  handleCheck = e => {
+    const switcher = { false: true, true: false }
+    this.setState((pS) => {
+      return {current: switcher[pS.current]}})
+  }
+
   handleHide = () => {
-    this.setState({name: ''})
+    this.setState({name: '', current: false})
     this.props.hideModal()
   }
 
   handleSubmit = e => {
     e.preventDefault()
-    this.props.createSeason(this.state.name)
+    this.props.createSeason(this.state)
+    this.handleHide()
   }
 
   render() {
@@ -42,10 +52,12 @@ class NewSeasonModal extends Component {
                 />
               </Form.Group>
             </Form.Row>
-            <Form.Row className="justify-content-center">
+            <Form.Row>
               <Form.Group as={Col} className="align-self-center mb-0">
-                <Form.Check 
+                <Form.Check
+                  onChange={this.handleCheck}
                   label="Current Season"
+                  checked={this.state.current}
                 />
               </Form.Group>
               <Form.Group as={Col} className="mb-0">

@@ -19,10 +19,10 @@ const PlayersTableBody = props => {
         <Col>{player.name}</Col>
         <Col>{player.position}</Col>
         <Col>{player.jerseyNum}</Col>
-        <Col>{player.gamesPlayed}</Col>
-        <Col>{player.goals}</Col>
-        <Col>{player.assists}</Col>
-        <Col>{player.points}</Col>
+        <Col>{player.stats.gamesPlayed}</Col>
+        <Col>{player.stats.goals}</Col>
+        <Col>{player.stats.assists}</Col>
+        <Col>{player.stats.points}</Col>
         <Col>{renderActions(player)}</Col>
       </Row>
     )

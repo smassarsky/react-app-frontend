@@ -8,9 +8,9 @@ const initialState = {
 }
 
 export function team(state = initialState, action) {
+  console.log(state, action)
   switch(action.type) {
     case teamConstants.SHOW_REQUEST:
-      console.log('hi')
       return {
         ...state,
         fetching: true
@@ -29,10 +29,20 @@ export function team(state = initialState, action) {
       }
 
     case teamConstants.CREATE_SEASON_SUCCESS:
+      //only one current season
+      const newSeasons = action.season.current ? (
+        [...state.details.seasons.map(season => {
+          if (season.current) {
+            return {...season, current: false}
+          } else {
+            return season
+          }
+        }), action.season]) : [...state.details.seasons, action.season]
+
       return {
         details: {
           ...state.details,
-          seasons: [...state.details.seasons, action.season]
+          seasons: newSeasons
         }
       }
 
@@ -54,7 +64,16 @@ export function team(state = initialState, action) {
       return {
         details: {
           ...state.details,
-          seasons: [state.details.seasons.map(season => season.id === action.season.id ? action.season : season)]
+          seasons: state.details.seasons.map(season => {
+            if (season.id === action.season.id) {
+              return action.season
+              // there can be only one (current season)
+            } else if (action.season.current && season.current) {
+              return {...season, current: false}
+            } else {
+              return season
+            }
+          })
         }
       }
 
@@ -76,7 +95,7 @@ export function team(state = initialState, action) {
       return {
         details: {
           ...state.details,
-          seasons: state.details.seasons.filter(season => season.id !== action.season.id)
+          seasons: state.details.seasons.filter(season => season.id !== action.seasonId)
         }
       }
 
@@ -117,7 +136,7 @@ export function team(state = initialState, action) {
       return {
         details: {
           ...state.details,
-          players: [state.details.players.map(player => player.id === action.player.id ? action.player : player)]
+          players: state.details.players.map(player => player.id === action.player.id ? action.player : player)
         }
       }
 
@@ -138,7 +157,7 @@ export function team(state = initialState, action) {
       return {
         details: {
           ...state.details,
-          players: state.details.players.filter(player => player.id !== action.player.id)
+          players: state.details.players.filter(player => player.id !== action.playerId)
         }
       }
 

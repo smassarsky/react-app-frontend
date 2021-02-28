@@ -54,26 +54,32 @@ class TeamShowPage extends Component {
 
   handleCreateSeason = (season) => {
     this.props.createSeason(this.props.team.id, season)
+    this.hideNewSeason()
   }
 
-  handleUpdateSeason = (seasonId, season) => {
-
+  handleUpdateSeason = (season) => {
+    this.props.updateSeason(season)
+    this.hideEditSeason()
   }
 
   handleDestroySeason = (seasonId) => {
-
+    this.props.destroySeason(seasonId)
+    this.hideDestroySeason()
   }
 
   handleCreatePlayer = (player) => {
-
+    this.props.createPlayer(this.props.team.id, player)
+    this.hideNewPlayer()
   }
 
-  handleUpdatePlayer = (playerId, player) => {
-
+  handleUpdatePlayer = (player) => {
+    this.props.updatePlayer(player)
+    this.hideEditPlayer()
   }
 
   handleDestroyPlayer = (playerId) => {
-
+    this.props.destroyPlayer(playerId)
+    this.hideDestroyPlayer()
   }
 
   componentDidMount() {
@@ -81,7 +87,6 @@ class TeamShowPage extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <Container fluid className="text-center">
         <TeamPageHeader teamName={this.props.team.name} />
@@ -141,7 +146,7 @@ class TeamShowPage extends Component {
 
         <EditPlayerModal
           show={this.state.editPlayer.show}
-          player={this.state.editPlayer.team}
+          player={this.state.editPlayer.player}
           hideModal={this.hideEditPlayer}
           updatePlayer={this.handleUpdatePlayer}
         />
@@ -169,8 +174,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     show: (teamId) => dispatch(teamActions.show(teamId)),
-    createSeason: (teamId, name) => dispatch(seasonActions.create(teamId, name)),
-    updateSeason: (seasonId, name) => dispatch(seasonActions.update(seasonId, name)),
+    createSeason: (teamId, season) => dispatch(seasonActions.create(teamId, season)),
+    updateSeason: (season) => dispatch(seasonActions.update(season)),
     destroySeason: (seasonId) => dispatch(seasonActions.destroy(seasonId)),
     createPlayer: (teamId, player) => dispatch(playerActions.create(teamId, player)),
     updatePlayer: (playerId, player) => dispatch(playerActions.update(playerId, player)),

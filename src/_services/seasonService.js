@@ -11,7 +11,7 @@ function show(seasonId) {
 
 }
 
-function create(teamId, name) {
+function create(teamId, season) {
   const options = {
     method: 'POST',
     headers: {
@@ -19,24 +19,25 @@ function create(teamId, name) {
       Accept: 'application/json'
     },
     credentials: 'include',
-    body: JSON.stringify({ 'team_id': teamId, name })
+    body: JSON.stringify({ season: {...season, 'team_id': teamId } })
   }
 
   return fetch(`${config.baseUrl}/seasons`, options)
     .then(handleResponse)
 }
 
-function update(seasonId, name) {
+function update(season) {
+  const { id, name, current } = season
   const options = {
-    method: 'POST',
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json'
     },
     credentials: 'include',
-    body: JSON.stringify({ name })
+    body: JSON.stringify({ season: { name, current } })
   }
-  return fetch(`${config.baseUrl}/seasons/${seasonId}`, options)
+  return fetch(`${config.baseUrl}/seasons/${id}`, options)
     .then(handleResponse)
 }
 

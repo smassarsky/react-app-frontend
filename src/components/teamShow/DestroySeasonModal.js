@@ -7,7 +7,7 @@ const DestroySeasonModal = props => {
   return (
     <Modal show={props.show} onHide={props.hideModal} centered="true">
       <Modal.Body className="text-center">
-        <h3>Delete {props.season ? props.season.name : ''}</h3>
+        <h3>Delete {props.season ? props.season.name : ''}?</h3>
         <Button
           onClick={() => props.destroySeason(props.season.id)}
           className="mx-3"
