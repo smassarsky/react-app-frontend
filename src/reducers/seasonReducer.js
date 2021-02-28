@@ -3,7 +3,8 @@ import { seasonConstants } from '../constants'
 const initialState = {
   details: {
     games: [],
-    players: []
+    players: [],
+    team: {id: null, name: null}
   }
 }
 

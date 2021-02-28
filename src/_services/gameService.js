@@ -1,18 +1,18 @@
 import { config } from '../config'
 
-export const seasonService = {
+export const gameService = {
   show,
   create,
   update,
   destroy
 }
 
-function show(seasonId) {
-  return fetch(`${config.baseUrl}/seasons/${seasonId}`, { credentials: 'include' })
+function show(gameId) {
+  return fetch(`${config.baseUrl}/games/${gameId}`, { credentials: 'include' })
     .then(handleResponse)
 }
 
-function create(teamId, season) {
+function create(seasonId, game) {
   const options = {
     method: 'POST',
     headers: {
@@ -20,15 +20,14 @@ function create(teamId, season) {
       Accept: 'application/json'
     },
     credentials: 'include',
-    body: JSON.stringify({ season: {...season, 'team_id': teamId } })
+    body: JSON.stringify({ game: {...game, 'season_id': seasonId } })
   }
 
-  return fetch(`${config.baseUrl}/seasons`, options)
+  return fetch(`${config.baseUrl}/games`, options)
     .then(handleResponse)
 }
 
-function update(season) {
-  const { id, name, current } = season
+function update(game) {
   const options = {
     method: 'PATCH',
     headers: {
@@ -36,18 +35,20 @@ function update(season) {
       Accept: 'application/json'
     },
     credentials: 'include',
-    body: JSON.stringify({ season: { name, current } })
+    body: JSON.stringify({ game })
   }
-  return fetch(`${config.baseUrl}/seasons/${id}`, options)
-    .then(handleResponse)
+
+  return fetch(`${config.baseUrl}/games/${game.id}`, options)
+  .then(handleResponse)
 }
 
-function destroy(seasonId) {
+function destroy(gameId) {
   const options = {
     method: 'DELETE',
     credentials: 'include'
   }
-  return fetch(`${config.baseUrl}/seasons/${seasonId}`, options)
+
+  return fetch(`${config.baseUrl}/games/${gameId}`, options)
     .then(handleResponse)
 }
 

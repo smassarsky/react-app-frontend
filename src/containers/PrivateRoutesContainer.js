@@ -6,10 +6,12 @@ import Navbar from '../components/Navbar'
 import Dashboard from '../components/Dashboard'
 import TeamsPage from '../components/teams/TeamsPage'
 import TeamShowPage from '../components/teamShow/TeamShowPage'
+import SeasonShowPage from '../components/seasonShow/SeasonShowPage'
 
 class PrivateRoutesContainer extends Component {
 
   render() {
+    console.log('hi')
     return (
       <>
         <Navbar />
@@ -17,6 +19,7 @@ class PrivateRoutesContainer extends Component {
           <Route exact path={'/dashboard'} component={Dashboard} />
           <Route exact path={'/teams'} component={TeamsPage} />
           <Route exact path={'/teams/:id'} component={TeamShowPage} />
+          <Route exact path={'/seasons/:id'} component={SeasonShowPage} />
         </Switch>
       </>
     )

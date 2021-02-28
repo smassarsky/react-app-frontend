@@ -1,6 +1,6 @@
 import camelcaseKeys from 'camelcase-keys'
 
-import { teamConstants } from '../constants'
+import { seasonConstants, teamConstants } from '../constants'
 
 import { seasonService } from '../_services'
 
@@ -14,7 +14,25 @@ export const seasonActions = {
 }
 
 function show(seasonId) {
+  return dispatch => {
+    dispatch(request())
+    dispatch(alertActions.clear())
 
+    seasonService.show(seasonId)
+      .then(
+        season => {
+          dispatch(success(camelcaseKeys(season, { deep: true })))
+        },
+        error => {
+          dispatch(failure())
+          dispatch(alertActions.error(error))
+        }
+      )
+  }
+
+  function request() { return { type: seasonConstants.SHOW_REQUEST } }
+  function success(season) { return { type: seasonConstants.SHOW_SUCCESS, season } }
+  function failure() { return { type: seasonConstants.SHOW_FAILURE } }
 }
 
 function create(teamId, season) {
