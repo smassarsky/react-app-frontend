@@ -32,3 +32,15 @@ export const editSeasonInitialState = {
   current: false,
   id: null
 }
+
+export const newGameInitialState = {
+  opponent: '',
+  status: 'TBP',
+  place: 'Home',
+  datetime: ''
+}
+
+export const editGameInitialState = {
+  ...newGameInitialState,
+  id: null
+}

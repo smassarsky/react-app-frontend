@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
 const GamesTableBody = props => {
+  console.log(props)
   return (
     <>
       { props.games.map(game => renderRow(game))}
@@ -17,9 +18,9 @@ const GamesTableBody = props => {
       <Col>{game.datetime}</Col>
       <Col>{game.place}</Col>
       <Col>{game.opponent}</Col>
-      <Col>{game.score}</Col>
+      <Col>{game.score.us} - {game.score.opponent}{game.score.outcome ? ` ${game.score.outcome}` : null}</Col>
       <Col>{game.status}</Col>
-      <Col>{renderActions()}</Col>
+      <Col>{renderActions(game)}</Col>
     </Row>
   }
 

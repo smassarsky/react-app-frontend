@@ -35,7 +35,7 @@ class SeasonShowPage extends Component {
 
   handleCreateGame = (game) => {
     this.props.createGame(this.props.season.id, game)
-    this.hideNewSeason()
+    this.hideNewGame()
   }
 
   handleUpdateGame = (game) => {
@@ -79,7 +79,7 @@ class SeasonShowPage extends Component {
         }
 
         <NewGameModal
-          show={this.state.showNewGame}
+          show={this.state.newGame}
           hideModal={this.hideNewGame}
           createGame={this.handleCreateGame}
         />

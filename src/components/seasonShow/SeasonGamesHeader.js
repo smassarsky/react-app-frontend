@@ -12,7 +12,7 @@ const SeasonGamesHeader = props => {
   function renderNewButton() {
     return (
       <Button
-        onClick={props.showModal}
+        onClick={props.showNewGame}
         variant="primary"
         type="button"
         size="sm">
