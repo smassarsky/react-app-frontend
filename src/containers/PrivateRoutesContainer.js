@@ -7,6 +7,7 @@ import Dashboard from '../components/Dashboard'
 import TeamsPage from '../components/teams/TeamsPage'
 import TeamShowPage from '../components/teamShow/TeamShowPage'
 import SeasonShowPage from '../components/seasonShow/SeasonShowPage'
+import GameShowPage from '../components/gameShow/GameShowPage'
 
 class PrivateRoutesContainer extends Component {
 
@@ -20,6 +21,7 @@ class PrivateRoutesContainer extends Component {
           <Route exact path={'/teams'} component={TeamsPage} />
           <Route exact path={'/teams/:id'} component={TeamShowPage} />
           <Route exact path={'/seasons/:id'} component={SeasonShowPage} />
+          <Route exact path={'/games/:id'} component={GameShowPage} />
         </Switch>
       </>
     )

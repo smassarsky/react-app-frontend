@@ -8,7 +8,9 @@ export function userReducer(state = initialState, action) {
     case userConstants.LOGIN_REQUEST:
       return {
         loggingIn: true,
+        id: action.user.id,
         username: action.user.username,
+        name: action.user.name
       }
     case userConstants.LOGIN_SUCCESS:
       return {
@@ -23,10 +25,7 @@ export function userReducer(state = initialState, action) {
       return {}
     case userConstants.SIGNUP_REQUEST:
       return {
-        signingUp: true,
-        id: action.user.id,
-        username: action.user.username,
-        name: action.user.name
+        signingUp: true
       }
     case userConstants.SIGNUP_SUCCESS:
       return {
