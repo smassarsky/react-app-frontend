@@ -13,6 +13,7 @@ export const gameActions = {
 }
 
 function show(gameId) {
+  console.log('hi')
   return dispatch => {
     dispatch(request())
     dispatch(alertActions.clear())

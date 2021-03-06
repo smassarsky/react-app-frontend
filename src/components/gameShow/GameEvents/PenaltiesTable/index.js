@@ -1,0 +1,1 @@
+export { default as PenaltiesTable } from './PenaltiesTable'

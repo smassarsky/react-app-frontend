@@ -1,4 +1,4 @@
-const baseUrl = 'http://polar-savannah-87773.herokuapp.com'
+const baseUrl = 'http://localhost:8000'
 
 export const config = {
   baseUrl
@@ -43,4 +43,23 @@ export const newGameInitialState = {
 export const editGameInitialState = {
   ...newGameInitialState,
   id: null
+}
+
+export const dateParser = (dateStr) => {
+  console.log(dateStr)
+  const options = {
+    weekday: 'short',
+    month: 'numeric',
+    year: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric'
+  }
+
+  return new Date(dateStr).toLocaleDateString(undefined, options)
+}
+
+export const formatScore = (scoreObj) => {
+  console.log(scoreObj.opponent)
+  return `${scoreObj.us} - ${scoreObj.opponent}${scoreObj.outcome ? scoreObj.outcome : '' }`
 }
