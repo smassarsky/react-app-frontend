@@ -46,7 +46,6 @@ export const editGameInitialState = {
 }
 
 export const dateParser = (dateStr) => {
-  console.log(dateStr)
   const options = {
     weekday: 'short',
     month: 'numeric',
@@ -60,6 +59,5 @@ export const dateParser = (dateStr) => {
 }
 
 export const formatScore = (scoreObj) => {
-  console.log(scoreObj.opponent)
   return `${scoreObj.us} - ${scoreObj.opponent}${scoreObj.outcome ? scoreObj.outcome : '' }`
 }

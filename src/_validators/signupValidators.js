@@ -1,5 +1,4 @@
 export const validateSignup = data => {
-  console.log(data)
   let errors = {}
   const fields = ['username', 'name', 'password', 'passwordConfirmation']
   fields.forEach(field => {

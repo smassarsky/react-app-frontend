@@ -12,7 +12,6 @@ import GameShowPage from '../components/gameShow/GameShowPage'
 class PrivateRoutesContainer extends Component {
 
   render() {
-    console.log('hi')
     return (
       <>
         <Navbar />

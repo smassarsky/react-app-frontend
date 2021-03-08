@@ -19,7 +19,6 @@ function show(teamId) {
 }
 
 function create(name) {
-  console.log(name)
   const options =  {
     method: 'POST',
     headers: {
@@ -29,11 +28,8 @@ function create(name) {
     credentials: 'include',
     body: JSON.stringify({ name })
   }
-
-  console.log(options)
   return fetch(`${config.baseUrl}/teams`, options)
   .then(handleResponse)
-
 }
 
 function update(name, teamId) {

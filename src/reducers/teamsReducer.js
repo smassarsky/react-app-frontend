@@ -30,7 +30,6 @@ export function teams(state = initialState, action) {
         list: [...state.list, action.team]
       }
     case teamsConstants.CREATE_FAILURE:
-      console.log(state)
       return {
         ...initialState,
         list: state.list

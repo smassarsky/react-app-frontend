@@ -3,7 +3,6 @@ import React from 'react'
 import { dateParser, formatScore } from '../../config'
 
 const GamePageHeader = (props) => {
-  console.log(props.score, formatScore(props.score))
   return (
     <div className="my-3">
       <h2>{props.teamName} - {props.seasonName}</h2>

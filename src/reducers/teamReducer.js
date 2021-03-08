@@ -8,7 +8,6 @@ const initialState = {
 }
 
 export function team(state = initialState, action) {
-  console.log(state, action)
   switch(action.type) {
     case teamConstants.SHOW_REQUEST:
       return {

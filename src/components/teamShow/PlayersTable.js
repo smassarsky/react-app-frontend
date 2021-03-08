@@ -4,7 +4,6 @@ import PlayersTableHead from './PlayersTableHead'
 import PlayersTableBody from './PlayersTableBody'
 
 const PlayersTable = props => {
-  console.log(props)
   return(
     <div className="my-table">
       <PlayersTableHead />

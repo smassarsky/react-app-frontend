@@ -9,7 +9,6 @@ const initialState = {
 }
 
 export function season(state = initialState, action) {
-  console.log(state,action)
   switch(action.type) {
     case seasonConstants.SHOW_REQUEST:
       return {

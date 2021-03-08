@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
 const SeasonsTableBody = props => {
-  console.log(props)
   return (
     <>
       { props.seasons.map(season => renderRow(season))}

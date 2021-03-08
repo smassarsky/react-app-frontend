@@ -27,7 +27,6 @@ class NewGameModal extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <Modal show={this.props.show} onHide={this.handleHide} centered="true">
         <Modal.Body>

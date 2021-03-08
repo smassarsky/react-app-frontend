@@ -49,12 +49,10 @@ class SeasonShowPage extends Component {
   }
 
   componentDidMount() {
-    console.log('hi')
     this.props.show(this.props.match.params.id)
   }
 
   render() {
-    console.log('hi')
     return (
       <Container fluid className="text-center">
 

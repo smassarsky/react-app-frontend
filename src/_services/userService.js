@@ -48,9 +48,7 @@ function currentUser() {
 }
 
 function handleResponse(response) {
-  console.log(response)
   return response.json().then(json => {
-    console.log(json)
     if (!response.ok || response.status !== 200) {
       const error = json.error || response.statusText
       return Promise.reject(error)

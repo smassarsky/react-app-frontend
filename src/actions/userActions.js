@@ -17,7 +17,6 @@ function signup(fields) {
     userService.signup(fields)
       .then(
         user => {
-          console.log(user)
           dispatch(success(user))
           localStorage.setItem('user', JSON.stringify(user))
           history.push('/dashboard')

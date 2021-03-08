@@ -4,7 +4,7 @@ const initialState = {
   details: {
     goals: [],
     penalties: [],
-    players: [],
+    playersList: [],
     score: {},
     team: { id: null, name: null },
     season: { id: null, name: null },
@@ -128,6 +128,52 @@ export function game(state = initialState, action) {
         }
       }
     case gameConstants.DESTROY_PENALTY_FAILURE:
+      return {
+        details: {
+          ...state.details
+        }
+      }
+    case gameConstants.ADD_PLAYER_REQUEST:
+      return {
+        ...state,
+        addPlayerFetch: true
+      }
+    case gameConstants.ADD_PLAYER_SUCCESS:
+      console.log(state, action)
+      return {
+        details: {
+          ...state.details,
+          usersPlayer: {
+            ...state.details.usersPlayer,
+            attending: action.isUser ? true : state.details.usersPlayer.attending
+          },
+          playersList: [...state.details.playersList, action.player]
+        }
+      }
+    case gameConstants.ADD_PLAYER_FAILURE:
+      return {
+        details: {
+          ...state.details
+        }
+      }
+    case gameConstants.REMOVE_PLAYER_REQUEST:
+      return {
+        ...state,
+        removePlayerFetch: true
+      }
+    case gameConstants.REMOVE_PLAYER_SUCCESS:
+      console.log(state, action)
+      return {
+        details: {
+          ...state.details,
+          usersPlayer: {
+            ...state.details.usersPlayer,
+            attending: action.isUser ? false : state.details.usersPlayer.attending
+          },
+          playersList: state.details.playersList.filter(player => player.id !== action.playerId)
+        }
+      }
+    case gameConstants.REMOVE_PLAYER_FAILURE:
       return {
         details: {
           ...state.details

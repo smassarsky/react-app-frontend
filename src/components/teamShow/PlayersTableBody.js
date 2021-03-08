@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 
 const PlayersTableBody = props => {
-  console.log(props)
   return (
     <>
       { props.players.map(player => renderRow(player))}

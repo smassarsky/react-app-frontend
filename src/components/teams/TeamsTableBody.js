@@ -10,7 +10,6 @@ import Button from 'react-bootstrap/Button'
 
 
 const TeamsTableBody = props => {
-  console.log(props)
   return (
     <>
       { props.teams.map(team => renderRow(team, props.userId)) }
@@ -18,7 +17,6 @@ const TeamsTableBody = props => {
   )
 
   function renderRow(team) {
-    console.log(team)
     return ( 
       <Row key={team.id} className="my-tbody">
         <Col>{team.name}</Col>
