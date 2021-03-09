@@ -23,8 +23,8 @@ class GameShowPage extends Component {
     editPenalty: { show: false, penalty: null },
     destroyPenalty: { show: false, penalty: null },
 
-    addPlayer: { show: false, player: null },
-    removePlayer: { show: false, player: null }
+    addPlayer: false,
+    removePlayer: { show: false, player: { id: null, name: '' } }
   }
 
   showNewGoal = () => this.setState({ newGoal: true })
@@ -41,10 +41,10 @@ class GameShowPage extends Component {
   showDestroyPenalty = (penalty) => this.setState({ destroyPenalty: { show: true, penalty } })
   hideDestroyPenalty = () => this.setState({ destroyPenalty: { show: false, penalty: null } })
 
-  showAddPlayer = (player) => this.setState({ addPlayer: { show: true, player } })
-  hideAddPlayer = () => this.setState({ addPlayer: { show: false, player: null } })
+  showAddPlayer = () => this.setState({ addPlayer: true })
+  hideAddPlayer = () => this.setState({ addPlayer: false })
   showRemovePlayer = (player) => this.setState({ removePlayer: { show: true, player } })
-  hideRemovePlayer = () => this.setState({ addPlayer: { show: false, player: null } })
+  hideRemovePlayer = () => this.setState({ removePlayer: { show: false, player: { id: null, name: '' } } })
 
   handleCreateGoal = goal => {
     this.props.createGoal(this.props.game.id, goal)
@@ -66,7 +66,7 @@ class GameShowPage extends Component {
     this.hideNewPenalty()
   }
 
-  handleEditPenalty = penalty => {
+  handleUpdatePenalty = penalty => {
     this.props.editPenalty(penalty)
     this.hideEditPenalty()
   }
@@ -77,12 +77,14 @@ class GameShowPage extends Component {
   }
 
   handleAddPlayer = playerId => {
-    this.props.addPlayer(this.props.game.id, playerId)
+    //last field sets whether to update UserAttendingPrompt component
+    this.props.addPlayer(this.props.game.id, playerId, parseInt(playerId) === this.props.game.usersPlayer.details.id)
     this.hideAddPlayer()
   }
 
   handleRemovePlayer = playerId => {
-    this.props.removePlayer(this.props.game.id, playerId)
+    //last field sets whether to update UserAttendingPrompt component
+    this.props.removePlayer(this.props.game.id, playerId, playerId === this.props.game.usersPlayer.details.id)
     this.hideRemovePlayer()
   }
 
@@ -127,15 +129,63 @@ class GameShowPage extends Component {
         />
 
         <Modals
-          newGoal={ { show: this.state.newGoal, hide: this.hideNewGoal } }
-          editGoal={ { show: this.state.editGoal, hide: this.hideEditGoal } }
-          destroyGoal={ { show: this.state.destroyGoal, hide: this.hideDestroyGoal } }
-          newPenalty={ { show: this.state.newPenalty, hide: this.hideNewPenalty } }
-          editPenalty={ { show: this.state.editPenalty, hide: this.hideEditPenalty } }
-          destroyPenalty={ { show: this.state.destroyPenalty, hide: this.hideDestroyPenalty } }
+          newGoal={ { 
+            show: this.state.newGoal,
+            hide: this.hideNewGoal,
+            submit: this.handleCreateGoal 
+          } }
 
-          addPlayer={ { show: this.state.showAddPlayer, hide: this.hideAddPlayer } }
-          removePlayer={ { show: this.state.showRemovePlayer, hide: this.hideRemovePlayer } }
+          editGoal={ { 
+            show: this.state.editGoal.show,
+            hide: this.hideEditGoal,
+            submit: this.handleUpdateGoal,
+            goal: this.state.editGoal.goal
+          } }
+
+          destroyGoal={ { 
+            show: this.state.destroyGoal.show,
+            hide: this.hideDestroyGoal,
+            submit: this.handleDestroyGoal,
+            goal: this.state.destroyGoal.goal
+          } }
+
+          newPenalty={ { 
+            show: this.state.newPenalty,
+            hide: this.hideNewPenalty,
+            submit: this.handleCreatePenalty
+          } }
+
+          editPenalty={ {
+            show: this.state.editPenalty.show,
+            hide: this.hideEditPenalty,
+            submit: this.handleUpdatePenalty,
+            penalty: this.state.editPenalty.penalty
+          } }
+
+          destroyPenalty={ {
+            show: this.state.destroyPenalty.show,
+            hide: this.hideDestroyPenalty,
+            submit: this.handleDestroyPenalty,
+            penalty: this.state.destroyPenalty.penalty
+          } }
+
+          addPlayer={ {
+            show: this.state.addPlayer,
+            hide: this.hideAddPlayer,
+            submit: this.handleAddPlayer
+          } }
+
+          removePlayer={ {
+            show: this.state.removePlayer.show,
+            hide: this.hideRemovePlayer,
+            submit: this.handleRemovePlayer,
+            player: this.state.removePlayer.player
+          } }
+
+          roster={this.props.game.team.roster}
+          players={this.props.game.playersList}
+          team={this.props.game.team}
+          opponent={this.props.game.opponent}
         />
 
       </Container>

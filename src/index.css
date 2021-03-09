@@ -53,3 +53,39 @@ code {
   border-top: 1px solid #dee2e6;
   padding: .5rem;
 }
+
+.badge > .close {
+  margin-left: .25rem;
+  color: inherit;
+  font-size: 100%;
+  text-shadow: 0 1px 0 rgba(#000, .5);
+}
+
+.time-setter-minutes {
+  border-right: 0px;
+  border-top-right-radius: 0rem;
+  border-bottom-right-radius: 0rem;
+
+}
+
+.time-setter-seconds {
+  border-left: 0px;
+  border-top-left-radius: 0rem;
+  border-bottom-left-radius: 0rem;
+}
+
+.time-setter-middle {
+  background-color: white;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-radius: 0rem;
+}
+
+.time-setter-minutes::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-control.time-setter-middle[readonly] {
+  background-color: white;
+}

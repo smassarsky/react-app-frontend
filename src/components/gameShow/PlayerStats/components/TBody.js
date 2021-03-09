@@ -13,7 +13,7 @@ const TBody = props => {
 
   function renderRow(player) {
     return (
-      <Row className="my-tbody">
+      <Row key={player.id} className="my-tbody">
         <Col>{player.name}</Col>
         <Col>{player.position}</Col>
         <Col>{player.jerseyNum}</Col>

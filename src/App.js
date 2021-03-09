@@ -17,7 +17,6 @@ class App extends Component {
     super(props)
 
     history.listen((location, actions) => {
-      console.log(history)
       this.props.clearAlerts()
     })
   }

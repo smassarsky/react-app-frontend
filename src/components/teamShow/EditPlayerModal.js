@@ -46,7 +46,7 @@ class EditPlayerModal extends Component {
 
   render() {
     return (
-      <Modal show={this.props.show} onHide={this.handleHide} centered="true">
+      <Modal show={this.props.show} onShow={this.handleShow} onHide={this.handleHide} centered="true">
         <Modal.Body>
           <Form onSubmit={this.handleSubmit}>
             <Form.Row>

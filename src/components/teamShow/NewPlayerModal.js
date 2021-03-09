@@ -36,9 +36,13 @@ class NewPlayerModal extends Component {
     return playerValues.playerPositions.map(position => <option value={position}>{position}</option>)
   }
 
+  handleShow = () => {
+    this.setState({...playerValues.newInitialState})
+  }
+
   render() {
     return (
-      <Modal show={this.props.show} onHide={this.handleHide} centered="true">
+      <Modal show={this.props.show} onHide={this.handleHide} onShow={this.handleShow} centered="true">
         <Modal.Body>
           <Form onSubmit={this.handleSubmit}>
             <Form.Row>

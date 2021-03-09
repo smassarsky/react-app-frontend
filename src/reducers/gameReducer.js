@@ -6,7 +6,11 @@ const initialState = {
     penalties: [],
     playersList: [],
     score: {},
-    team: { id: null, name: null },
+    team: {
+      id: null,
+      name: null,
+      roster: { active: [], inactive: [] }
+    },
     season: { id: null, name: null },
     owner: { id: null }
   }
