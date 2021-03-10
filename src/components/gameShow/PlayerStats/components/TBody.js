@@ -20,6 +20,7 @@ const TBody = props => {
         <Col>{player.stats.goals}</Col>
         <Col>{player.stats.assists}</Col>
         <Col>{player.stats.points}</Col>
+        <Col>{player.stats.plusMinus}</Col>
         <Col>{player.stats.pim}</Col>
         { props.owner ? renderButtons(player) : null }
       </Row>

@@ -48,7 +48,7 @@ class GameShowPage extends Component {
 
   handleCreateGoal = goal => {
     this.props.createGoal(this.props.game.id, goal)
-    this.hideNewGame()
+    this.hideNewGoal()
   }
 
   handleUpdateGoal = goal => {
@@ -116,10 +116,18 @@ class GameShowPage extends Component {
         />
 
         <GameEvents
-          goals={this.props.game.goals}
-          penalties={this.props.game.penalties}
+          goals={this.props.game.events.goals}
+          penalties={this.props.game.events.penalties}
           owner={this.props.owner}
-          modalControls={ { showNewGoal: this.showNewGoal, showNewPenalty: this.showNewPenalty } }
+          opponent={this.props.game.opponent}
+          modalControls={ {
+            showNewGoal: this.showNewGoal,
+            showNewPenalty: this.showNewPenalty,
+            showEditGoal: this.showEditGoal,
+            showEditPenalty: this.showEditPenalty,
+            showDestroyGoal: this.showDestroyGoal,
+            showDestroyPenalty: this.showDestroyPenalty
+          } }
         />
 
         <PlayerStats

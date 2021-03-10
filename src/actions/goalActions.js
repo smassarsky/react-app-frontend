@@ -2,6 +2,7 @@ import camelcaseKeys from 'camelcase-keys'
 
 import { gameConstants } from '../constants'
 import { goalService } from '../_services/goalService'
+import { goalValidations } from '../_validators/goalValidators'
 import { alertActions } from './alertActions'
 
 export const goalActions = {
@@ -15,9 +16,22 @@ function create(gameId, goal) {
     dispatch(request())
     dispatch(alertActions.clear())
 
-    goalService.create(gameId, goal)
+    console.log(goal)
+
+
+    const goalOut = {
+      teamId: goal.team ? goal.team.id : null,
+      playerId: goal.player ? goal.player.id : null,
+      assistPlayerIds: goal.assistPlayers.map(player => player.id),
+      onIcePlayerIds: goal.onIcePlayers.map(player => player.id),
+      period: goal.period,
+      time: `${goal.minutes}`.padStart(2, '0') + ':' + `${goal.seconds}`.padStart(2, '0')
+    }
+
+    goalService.create(gameId, goalOut)
       .then(
         goal => {
+          console.log(goal)
           dispatch(success(camelcaseKeys(goal, { deep: true })))
           dispatch(alertActions.success("GoalCreated"))
         },
@@ -29,7 +43,7 @@ function create(gameId, goal) {
   }
 
   function request() { return { type: gameConstants.CREATE_GOAL_REQUEST } }
-  function success(goal) { return { type: gameConstants.CREATE_GOAL_SUCCESS } }
+  function success(goal) { return { type: gameConstants.CREATE_GOAL_SUCCESS, goal } }
   function failure() { return { type: gameConstants.CREATE_GOAL_FAILURE } }
 }
 
@@ -38,7 +52,21 @@ function update(goal) {
     dispatch(request())
     dispatch(alertActions.clear())
 
-    goalService.update(goal)
+    console.log(goal)
+
+    const goalOut = {
+      id: goal.goalId,
+      teamId: goal.team.id === {} ? null : goal.team.id,
+      playerId: goal.player === {} ? null : goal.player.id,
+      assistPlayerIds: goal.assistPlayers.map(player => player.id),
+      onIcePlayerIds: goal.onIcePlayers.map(player => player.id),
+      period: goal.period,
+      time: `${goal.minutes}`.padStart(2, '0') + ':' + `${goal.seconds}`.padStart(2, '0')
+    }
+
+    console.log(goalOut)
+
+    goalService.update(goalOut)
       .then(
         goal => {
           dispatch(success(camelcaseKeys(goal, { deep: true })))

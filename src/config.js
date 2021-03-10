@@ -72,3 +72,26 @@ export const periods = {
   7: 'OT4',
   99: 'S/O'
 }
+
+export const newGoalInitialState = {
+  player: {},
+  assistPlayers: [],
+  onIcePlayers: [],
+  team: {},
+  period: '1',
+  minutes: 0,
+  seconds: 0,
+  errors: {}
+}
+
+export const editGoalInitialState = {
+  goalId: null,
+  player: {},
+  assistPlayers: [],
+  onIcePlayers: [],
+  team: {},
+  period: '1',
+  minutes: 0,
+  seconds: 0,
+  errors: {}
+}

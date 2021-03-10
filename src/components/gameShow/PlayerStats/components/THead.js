@@ -11,6 +11,7 @@ const THead = props => {
       <Col>Jersey</Col>
       <Col>Goals</Col>
       <Col>Assists</Col>
+      <Col>Points</Col>
       <Col>+ / -</Col>
       <Col>PIM</Col>
       { props.owner ? <Col>Actions</Col> : null }

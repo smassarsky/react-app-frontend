@@ -22,12 +22,14 @@ const Modals = props => {
         submit={props.editGoal.submit}
         players={props.players}
         opponent={props.opponent}
+        team={props.team}
         goal={props.editGoal.goal}
       />
 
       <DestroyGoal
         show={props.destroyGoal.show}
         hide={props.destroyGoal.hide}
+        opponent={props.opponent}
         submit={props.destroyGoal.submit}
         goal={props.destroyGoal.goal}
       />

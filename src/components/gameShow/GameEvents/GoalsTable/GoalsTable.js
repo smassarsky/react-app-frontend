@@ -13,10 +13,11 @@ const GoalsTable = (props) => {
   function renderTable() {
     return (
       <>
-        <THead />
+        <THead owner={props.owner}/>
         <TBody
           goals={props.goals}
           owner={props.owner}
+          opponent={props.opponent}
           modalControls={props.modalControls}  
         />
       </>

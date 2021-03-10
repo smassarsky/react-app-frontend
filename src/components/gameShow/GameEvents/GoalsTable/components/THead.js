@@ -11,6 +11,8 @@ const THead = (props) => {
       <Col>Team</Col>
       <Col>Scorer</Col>
       <Col>Assists</Col>
+      <Col>On Ice</Col>
+      {props.owner ? <Col>Actions</Col> : null}
     </Row>
   )
 }
