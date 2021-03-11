@@ -1,6 +1,7 @@
 import camelcaseKeys from 'camelcase-keys'
 
 import { gameConstants } from '../constants'
+import { goalService } from '../_services/goalService'
 import { penaltyService } from '../_services/penaltyService'
 import { alertActions } from './alertActions'
 
@@ -15,7 +16,18 @@ function create(gameId, penalty) {
     dispatch(request())
     dispatch(alertActions.clear())
 
-    penaltyService.create(gameId, penalty)
+    console.log(penalty)
+
+    const penaltyOut = {
+      teamId: penalty.team ? penalty.team.id : null,
+      playerId: penalty.player ? penalty.player.id : null,
+      period: penalty.period,
+      time: `${penalty.minutes}`.padStart(2, '0') + ':' + `${penalty.seconds}`.padStart(2, '0'),
+      infraction: penalty.infraction,
+      length: penalty.length
+    }
+
+    penaltyService.create(gameId, penaltyOut)
       .then(
         penalty => {
           dispatch(success(camelcaseKeys(penalty, { deep: true })))

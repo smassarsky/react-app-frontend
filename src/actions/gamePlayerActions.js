@@ -18,7 +18,7 @@ function add(gameId, playerId, isUser) {
     gamePlayerService.add(gameId, playerId)
       .then(
         player => {
-          dispatch(success(camelcaseKeys(player, isUser, { deep: true })))
+          dispatch(success(camelcaseKeys({...player, isUser}, { deep: true })))
           dispatch(alertActions.success("Player Added!"))
         },
         error => {

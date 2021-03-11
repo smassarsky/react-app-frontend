@@ -42,7 +42,7 @@ function destroy(penaltyId) {
     credentials: 'include'
   }
 
-  return fetch(`${config.baseUrl}/penalties`, options)
+  return fetch(`${config.baseUrl}/penalties/${penaltyId}`, options)
     .then(handleResponse)
 }
 

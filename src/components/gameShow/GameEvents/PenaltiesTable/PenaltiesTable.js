@@ -13,9 +13,10 @@ const PenaltiesTable = (props) => {
   function renderTable() {
     return (
       <>
-        <THead />
+        <THead owner={props.owner} />
         <TBody 
           penalties={props.penalties}
+          opponent={props.opponent}
           owner={props.owner}
           modalControls={props.modalControls}
         />

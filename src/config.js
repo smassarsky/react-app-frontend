@@ -95,3 +95,24 @@ export const editGoalInitialState = {
   seconds: 0,
   errors: {}
 }
+
+export const newPenaltyInitialState = {
+  player: {},
+  team: {},
+  period: '1',
+  minutes: 0,
+  seconds: 0,
+  length: 0,
+  infraction: ''
+}
+
+export const editPenaltyInitialState = {
+  penaltyId: null,
+  player: {},
+  team: {},
+  period: '1',
+  minutes: 0,
+  seconds: 0,
+  length: 0,
+  infraction: ''
+}

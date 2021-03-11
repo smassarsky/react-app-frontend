@@ -29,6 +29,7 @@ const GameEvents = (props) => {
       <PenaltiesTable
         penalties={props.penalties}
         owner={props.owner}
+        opponent={props.opponent}
         modalControls={ {
           showEditPenalty: props.modalControls.showEditPenalty,
           showDestroyPenalty: props.modalControls.showDestroyPenalty

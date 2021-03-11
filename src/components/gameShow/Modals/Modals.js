@@ -39,6 +39,8 @@ const Modals = props => {
         hide={props.newPenalty.hide}
         submit={props.newPenalty.submit}
         players={props.players}
+        team={props.team}
+        opponent={props.opponent}
       />
 
       <EditPenalty
@@ -46,14 +48,16 @@ const Modals = props => {
         hide={props.editPenalty.hide}
         submit={props.editPenalty.submit}
         players={props.players}
-        penalty={props.penalty}
+        team={props.team}
+        opponent={props.opponent}
+        penalty={props.editPenalty.penalty}
       />
 
       <DestroyPenalty
         show={props.destroyPenalty.show}
         hide={props.destroyPenalty.hide}
         submit={props.destroyPenalty.submit}
-        penalty={props.penalty}
+        penalty={props.destroyPenalty.penalty}
       />
 
       <AddPlayer

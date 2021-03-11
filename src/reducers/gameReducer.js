@@ -282,12 +282,40 @@ export function game(state = initialState, action) {
         createPenaltyFetch: true
       }
     case gameConstants.CREATE_PENALTY_SUCCESS:
+
+      const newPenaltyEvents = {
+        ...state.details.events,
+        penalties: [...state.details.events.penalties, action.penalty]
+      }
+      
+      let newPenaltyPlayersList = {}
+      
+      if (action.penalty.team) {
+        newPenaltyPlayersList = state.details.playersList.map(player => {
+          if (action.penalty.player.id === player.id) {
+            return {
+              ...player,
+              stats: {
+                ...player.stats,
+                pim: player.stats.pim + action.penalty.length
+              }
+            }
+          } else {
+            return player
+          }
+        })
+      } else {
+        newPenaltyPlayersList = state.details.playersList
+      }
+
       return {
         details: {
           ...state.details,
-          penalties: [...state.details.penalties, action.penalty]
+          events: newPenaltyEvents,
+          playersList: newPenaltyPlayersList
         }
       }
+
     case gameConstants.CREATE_PENALTY_FAILURE:
       return {
         details: {
@@ -300,6 +328,13 @@ export function game(state = initialState, action) {
         updatePenaltyFetch: true
       }
     case gameConstants.UPDATE_PENALTY_SUCCESS:
+
+
+//////
+
+
+
+
       return {
         details: {
           ...state.details,
@@ -318,12 +353,42 @@ export function game(state = initialState, action) {
         destroyPenaltyFetch: true
       }
     case gameConstants.DESTROY_PENALTY_SUCCESS:
+
+      const penaltyToDestroy = state.details.events.penalties.find(penalty => penalty.id === action.penaltyId)
+
+      const destroyPenaltyEvents = {
+        ...state.details.events,
+        penalties: state.details.events.penalties.filter(penalty => penalty.id !== action.penaltyId)
+      }
+
+      let destroyPenaltyPlayersList = {}
+
+      if (penaltyToDestroy.team) {
+        destroyPenaltyPlayersList = state.details.playersList.map(player => {
+          if (penaltyToDestroy.player.id === player.id) {
+            return {
+              ...player,
+              stats: {
+                ...player.stats,
+                pim: player.stats.pim - penaltyToDestroy.length
+              }
+            }
+          } else {
+            return player
+          }
+        })
+      } else {
+        destroyPenaltyPlayersList = state.details.playersList
+      }
+
       return {
         details: {
           ...state.details,
-          penalties: state.penalties.filter(penalty => penalty.id !== action.penaltyId)
+          events: destroyPenaltyEvents,
+          playersList: destroyPenaltyPlayersList
         }
       }
+
     case gameConstants.DESTROY_PENALTY_FAILURE:
       return {
         details: {

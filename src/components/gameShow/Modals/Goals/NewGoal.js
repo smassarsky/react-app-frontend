@@ -64,7 +64,7 @@ class NewGoal extends Component {
   }
 
   setTeam = e => {
-    this.setState({ team: e.target.value === '' ? {} : this.props.team })
+    this.setState((pS) => goalValidations.setTeam(pS, e.target.value, this.props.team))
   }
 
   setPeriod = e => {
@@ -195,7 +195,7 @@ class NewGoal extends Component {
                   onChange={this.handleSetScorer}
                   as="select"
                   name="player"
-                  value={this.state.playerId}
+                  value={this.state.player.id}
                   disabled={this.state.team.id ? false : true}
                 >
                   {this.renderOptions()}
