@@ -1,4 +1,5 @@
 import { gameConstants } from '../constants'
+import { sortEvents } from '../config'
 
 const initialState = {
   details: {
@@ -45,7 +46,7 @@ export function game(state = initialState, action) {
 
       const newEvents = {
         ...state.details.events,
-        goals: [...state.details.events.goals, action.goal]
+        goals: sortEvents([...state.details.events.goals, action.goal])
       }
 
       let newPlayersList = {}
@@ -122,7 +123,7 @@ export function game(state = initialState, action) {
 
       const updateGoalNewEvents = {
         ...state.details.events,
-        goals: state.details.events.goals.map(goal => goal.id === action.goal.id ? action.goal : goal)
+        goals: sortEvents(state.details.events.goals.map(goal => goal.id === action.goal.id ? action.goal : goal))
       }
 
       const oldPlusMinusIds = prevGoal.onIcePlayers.map(player => player.id)
@@ -285,7 +286,7 @@ export function game(state = initialState, action) {
 
       const newPenaltyEvents = {
         ...state.details.events,
-        penalties: [...state.details.events.penalties, action.penalty]
+        penalties: sortEvents([...state.details.events.penalties, action.penalty])
       }
       
       let newPenaltyPlayersList = {}
@@ -329,18 +330,45 @@ export function game(state = initialState, action) {
       }
     case gameConstants.UPDATE_PENALTY_SUCCESS:
 
+      const penaltyToUpdate = state.details.events.penalties.find(penalty => penalty.id === action.penalty.id)
 
-//////
+      const updatePenaltyEvents = {
+        ...state.details.events,
+        penalties: sortEvents(state.details.events.penalties.map(penalty => penalty.id === action.penalty.id ? action.penalty : penalty))
+      }
 
+      let updatePenaltyPlayersList = {}
 
-
+      if (action.penalty.team || penaltyToUpdate.team) {
+        updatePenaltyPlayersList = state.details.playersList.map(player => {
+          let updatePlayerPim = player.stats.pim
+          console.log(player, updatePlayerPim)
+          if (penaltyToUpdate.player && penaltyToUpdate.player.id === player.id) {
+            updatePlayerPim -= penaltyToUpdate.length
+          }
+          if (action.penalty.player && action.penalty.player.id === player.id) {
+            updatePlayerPim += action.penalty.length
+          }
+          return {
+            ...player,
+            stats: {
+              ...player.stats,
+              pim: updatePlayerPim
+            }
+          }
+        })
+      } else {
+        updatePenaltyPlayersList = state.details.playersList
+      }
 
       return {
         details: {
           ...state.details,
-          penalties: state.details.penalties.map(penalty => penalty.id === action.penalty.id ? action.penalty : penalty)
+          events: updatePenaltyEvents,
+          playersList: updatePenaltyPlayersList
         }
       }
+
     case gameConstants.UPDATE_PENALTY_FAILURE:
       return {
         details: {

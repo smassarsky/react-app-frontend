@@ -87,7 +87,7 @@ function addAssist(prevState, playerId, players) {
 
 function removeAssist(prevState, playerId) {
   return {
-    assists: prevState.assistPlayers.filter(player => player.id !== playerId),
+    assistPlayers: prevState.assistPlayers.filter(player => player.id !== playerId),
     onIcePlayers: prevState.onIcePlayers.filter(player => player.id !== playerId),
     errors: {}
   }

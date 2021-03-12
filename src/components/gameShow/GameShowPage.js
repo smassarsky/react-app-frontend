@@ -67,7 +67,7 @@ class GameShowPage extends Component {
   }
 
   handleUpdatePenalty = penalty => {
-    this.props.editPenalty(penalty)
+    this.props.updatePenalty(penalty)
     this.hideEditPenalty()
   }
 

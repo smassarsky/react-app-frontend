@@ -12,6 +12,7 @@ import Alerts from '../../components/Alerts'
 import SeasonGamesHeader from './SeasonGamesHeader'
 
 import GamesTable from './GamesTable'
+import { PlayersTable } from './PlayersTable'
 
 import NewGameModal from './NewGameModal'
 import EditGameModal from './EditGameModal'
@@ -76,6 +77,10 @@ class SeasonShowPage extends Component {
           /> : <h4>No Games Yet</h4>
         }
 
+        <PlayersTable 
+          players={this.props.season.playersList || []}
+        />
+
         <NewGameModal
           show={this.state.newGame}
           hideModal={this.hideNewGame}
@@ -104,6 +109,7 @@ class SeasonShowPage extends Component {
 
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
     season: state.season.details,
     owner: state.user.id === state.season.details.team.ownerId

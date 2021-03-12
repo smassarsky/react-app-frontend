@@ -116,3 +116,21 @@ export const editPenaltyInitialState = {
   length: 0,
   infraction: ''
 }
+
+export function sortEvents(events) {
+  return events.sort((a, b) => {
+    if (a.period > b.period) {
+      return 1
+    } else if (a.period < b.period) {
+      return -1
+    } else {
+      if (a.time > b.time) {
+        return 1
+      } else if (a.time < b.time) {
+        return -1
+      } else {
+        return 0
+      }
+    }
+  })
+}

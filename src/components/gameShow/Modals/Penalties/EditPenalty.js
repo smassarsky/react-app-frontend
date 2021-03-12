@@ -14,15 +14,15 @@ class EditPenalty extends Component {
   state = editPenaltyInitialState
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps, this.props, prevProps === this.props)
-    if (this.props.penalty && this.state.penaltyId !== this.props.penalty.id) {
+    console.log(prevProps, this.props, prevProps === this.props, this.state)
+    if (this.props.penalty && prevProps.penalty !== this.props.penalty) {
       console.log('hi again')
       const { period, time, infraction, length } = this.props.penalty
       const player = this.props.penalty.player || {}
       const team = this.props.penalty.team || {}
       const penaltyId = this.props.penalty.id
       const [minutes, seconds] = time.split(':')
-      this.setState( this.props.goal ? { penaltyId, player, team, period, minutes, seconds, infraction, length } : editPenaltyInitialState)
+      this.setState( this.props.penalty ? { penaltyId, player, team, period, minutes, seconds, infraction, length } : editPenaltyInitialState)
     }
   }
 
@@ -211,7 +211,7 @@ class EditPenalty extends Component {
                   variant="primary"
                   block
                 >
-                  Add Penalty
+                  Update Penalty
                 </Button>
               </Form.Group>
             </Form.Row>
