@@ -1,9 +1,11 @@
 import React from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
 
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+
+import { ShowButton, EditButton, DestroyButton } from '../buttons'
+
+import { dateParser } from '../../config'
 
 const GamesTableBody = props => {
   return (
@@ -14,7 +16,7 @@ const GamesTableBody = props => {
 
   function renderRow(game) {
     return <Row className="my-tbody">
-      <Col>{game.datetime}</Col>
+      <Col>{dateParser(game.datetime)}</Col>
       <Col>{game.place}</Col>
       <Col>{game.opponent}</Col>
       <Col>{game.score.us} - {game.score.opponent}{game.score.outcome ? ` ${game.score.outcome}` : null}</Col>
@@ -26,26 +28,20 @@ const GamesTableBody = props => {
   function renderActions(game) {
     return (
       <>
-        <LinkContainer to={`/games/${game.id}`} >
-          <Button size="sm" type="button">Show</Button>
-        </LinkContainer>
+        <ShowButton
+          to={`/games/${game.id}`}
+          title="View Game"
+        />
         { props.owner ? 
           <>
-            <Button
-              onClick={() => props.modals.edit(game)}
-              className="ml-3"
-              size="sm"
-              type="button">
-                Edit
-            </Button>
-            <Button
-              onClick={() => props.modals.destroy(game)}
-              className="ml-3"
-              variant="danger"
-              size="sm"
-              typ="button">
-                Delete
-            </Button>
+            <EditButton
+              action={() => props.modals.edit(game)}
+              title="Edit Game"
+            />
+            <DestroyButton
+              action={() => props.modals.destroy(game)}
+              title="Delete Game"
+            />
           </> : null
         }
       </>

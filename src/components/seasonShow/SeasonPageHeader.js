@@ -1,8 +1,17 @@
 import React from 'react'
 
+import { BackButton } from 'components/buttons'
+
 const SeasonPageHeader = props => {
   return (
-    <h2 className="mt-3">{props.teamName} - {props.seasonName}</h2>
+    <div className="mt-3 d-flex justify-content-center align-items-center">
+      <BackButton
+        to={`/teams/${props.team.id}`}
+        title="Back to Team Page"
+      />
+      <h2 className="my-auto">{props.team.name} - {props.seasonName}</h2>
+    </div>
+    
   )
 }
 

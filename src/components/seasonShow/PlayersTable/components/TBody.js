@@ -2,7 +2,8 @@ import React from 'react'
 
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+
+import { ShowButton } from 'components/buttons'
 
 const TBody = props => {
   console.log(props.players)
@@ -13,26 +14,25 @@ const TBody = props => {
   )
 
   function renderRow(player) {
-    return <Row className="my-tbody">
-      <Col>{player.name}</Col>
-      <Col>{player.position}</Col>
-      <Col>{player.jerseyNum}</Col>
-      <Col>{player.stats.gamesPlayed}</Col>
-      <Col>{player.stats.goals}</Col>
-      <Col>{player.stats.assists}</Col>
-      <Col>{player.stats.points}</Col>
-      <Col>{player.stats.plusMinus}</Col>
-      <Col>{player.stats.pim}</Col>
-      <Col>
-        <Button
-          type="button"
-          variant="primary"
-          size="sm"
-        >
-          Show
-        </Button>
-      </Col>
-    </Row>
+    return (
+      <Row className="my-tbody">
+        <Col>{player.name}</Col>
+        <Col>{player.position}</Col>
+        <Col>{player.jerseyNum}</Col>
+        <Col>{player.stats.gamesPlayed}</Col>
+        <Col>{player.stats.goals}</Col>
+        <Col>{player.stats.assists}</Col>
+        <Col>{player.stats.points}</Col>
+        <Col>{player.stats.plusMinus}</Col>
+        <Col>{player.stats.pim}</Col>
+        <Col>
+          <ShowButton
+            to={`/players/${player.id}`}
+            title="View Player"
+          />
+        </Col>
+      </Row>
+    )
   }
 }
 

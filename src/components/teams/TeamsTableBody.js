@@ -1,9 +1,11 @@
 import React from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
 
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+
+import { ShowButton, EditButton, DestroyButton } from '../buttons'
+
+import { formatNextGame, formatLastGame, parseRecord } from '../../config'
 
 
 
@@ -13,18 +15,22 @@ const TeamsTableBody = props => {
   return (
     <>
       { props.teams.map(team => renderRow(team, props.userId)) }
+      <div>
+        <small><i>* Record format: W - L - T - OTL</i></small>
+      </div>
     </>
   )
 
   function renderRow(team) {
+    console.log(team)
     return ( 
       <Row key={team.id} className="my-tbody">
         <Col>{team.name}</Col>
         <Col>{team.owner.name}</Col>
         <Col>{team.currentSeasonName}</Col>
-        <Col>{team.currentRecord}</Col>
-        <Col>{team.nextGame}</Col>
-        <Col>{team.lastGame}</Col>
+        <Col>{parseRecord(team.currentRecord)}</Col>
+        <Col>{formatNextGame(team.nextGame)}</Col>
+        <Col>{formatLastGame(team.lastGame)}</Col>
         <Col>{renderActions(team)}</Col>
       </Row>
     )
@@ -33,13 +39,18 @@ const TeamsTableBody = props => {
   function renderActions(team) {
     return (
       <>
-        <LinkContainer to={`/teams/${team.id}`} >
-          <Button size="sm" type="button">Show</Button>
-        </LinkContainer>
-        {team.owner.id === props.userId ?  <>
-                    <Button onClick={() => props.modals.edit(team)} className="ml-3" size="sm" type="button">Edit</Button>
-                    <Button onClick={() => props.modals.destroy(team)} className="ml-3" variant="danger" size="sm" type="button">Delete</Button>
-                  </> : null}
+        <ShowButton to={`/teams/${team.id}`} title="View Team" />
+        {team.owner.id === props.userId ?
+        <>
+          <EditButton
+            action={() => props.modals.edit(team)}
+            title="Edit Team"
+          />
+          <DestroyButton
+            action={() => props.modals.destroy(team)}
+            title="Delete Team"
+          />
+        </> : null}
       </>
     )
   }

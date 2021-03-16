@@ -1,9 +1,9 @@
 import React from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
 
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+
+import { ShowButton, EditButton, DestroyButton } from '../buttons'
 
 const PlayersTableBody = props => {
   return (
@@ -30,26 +30,20 @@ const PlayersTableBody = props => {
   function renderActions(player) {
     return(
       <>
-        <LinkContainer to={`/players/${player.id}`} >
-          <Button size="sm" type="button">Show</Button>
-        </LinkContainer>
+        <ShowButton
+          to={`/players/${player.id}`}
+          title="View Player"
+        />
         {props.owner ? 
           <>
-            <Button 
-              onClick={() => props.modals.edit(player)}
-              className="ml-3"
-              size="sm"
-              type="button">
-                Edit
-            </Button>
-            <Button
-              onClick={() => props.modals.destroy(player)}
-              className="ml-3"
-              variant="danger"
-              size="sm"
-              type="button">
-                Delete
-            </Button>
+            <EditButton
+              action={() => props.modals.edit(player)}
+              title="Edit Player"
+            />
+            <DestroyButton
+              action={() => props.modals.destroy(player)}
+              title="Delete Player"
+            />
           </> : null
         }
       </>

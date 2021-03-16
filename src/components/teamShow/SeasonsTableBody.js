@@ -1,23 +1,28 @@
 import React from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
 
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+
+import { ShowButton, EditButton, DestroyButton } from 'components/buttons'
+
+import { formatNextGame, formatLastGame, parseRecord } from 'config'
 
 const SeasonsTableBody = props => {
   return (
     <>
       { props.seasons.map(season => renderRow(season))}
+      <div>
+        <small><i>* Record format: W - L - T - OTL</i></small>
+      </div>
     </>
   )
 
   function renderRow(season) {
     return <Row className="my-tbody">
       <Col>{season.name}{season.current ? " (Current)" : ""}</Col>
-      <Col>{season.record}</Col>
-      <Col>{season.nextGame}</Col>
-      <Col>{season.lastGame}</Col>
+      <Col>{parseRecord(season.record)}</Col>
+      <Col>{formatNextGame(season.nextGame)}</Col>
+      <Col>{formatLastGame(season.lastGame)}</Col>
       <Col>{renderActions(season)}</Col>
     </Row>
   }
@@ -25,26 +30,18 @@ const SeasonsTableBody = props => {
   function renderActions(season) {
     return (
       <>
-        <LinkContainer to={`/seasons/${season.id}`} >
-          <Button size="sm" type="button">Show</Button>
-        </LinkContainer>
+        <ShowButton to={`/seasons/${season.id}`} title="View Season" />
+
         { props.owner ?
           <>
-            <Button
-              onClick={() => props.modals.edit(season)}
-              className="ml-3"
-              size="sm"
-              type="button">
-                Edit
-            </Button>
-            <Button
-              onClick={() => props.modals.destroy(season)}
-              className="ml-3"
-              variant="danger"
-              size="sm"
-              type="button">
-                Delete
-            </Button>
+            <EditButton
+              action={() => props.modals.edit(season)}
+              title="Edit Season"
+            />
+            <DestroyButton
+              action={() => props.modals.destroy(season)}
+              title="Delete Season"  
+            />
           </> : null
         }
       </>

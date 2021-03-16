@@ -9,7 +9,7 @@ const TeamsTableHead = props => {
       <Col>Name</Col>
       <Col>Owner</Col>
       <Col>Current Season</Col>
-      <Col>Current Record</Col>
+      <Col>Current Record*</Col>
       <Col>Next Game</Col>
       <Col>Last Game</Col>
       <Col>Actions</Col>

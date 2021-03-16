@@ -2,7 +2,8 @@ import React from 'react'
 
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+
+import { DestroyButton } from 'components/buttons'
 
 const TBody = props => {
   return (
@@ -29,14 +30,10 @@ const TBody = props => {
     function renderButtons(player) {
       return (
         <Col>
-          <Button
-            onClick={() => props.showRemoveModal(player)}
-            size="sm"
-            variant="danger"
-            type="button"
-          >
-            Remove
-          </Button>
+          <DestroyButton
+            action={() => props.showRemoveModal(player)}
+            title="Remove Player"
+          />
         </Col>
       )
     }

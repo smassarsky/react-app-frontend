@@ -58,8 +58,30 @@ export const dateParser = (dateStr) => {
   return new Date(dateStr).toLocaleDateString(undefined, options)
 }
 
+export const shortDate = dateStr => {
+  const options = {
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric'
+  }
+  return new Date(dateStr).toLocaleDateString(undefined, options)
+}
+
 export const formatScore = (scoreObj) => {
-  return `${scoreObj.us} - ${scoreObj.opponent}${scoreObj.outcome ? scoreObj.outcome : '' }`
+  return `${scoreObj.us} - ${scoreObj.opponent}${scoreObj.outcome ? ` ${scoreObj.outcome}` : '' }`
+}
+
+export const formatNextGame = game => {
+  return game ? `${shortDate(game.datetime)} ${game.place === 'Home' ? 'vs' : 'at'} ${game.opponent}` : '-'
+}
+
+export const formatLastGame = game => {
+  return game ? `${formatScore(game.score)} ${game.place === 'Home' ? 'vs' : 'at'} ${game.opponent}` : '-'
+}
+
+export const parseRecord = record => {
+  return record ? `${record.w} - ${record.l} - ${record.t} - ${record.otl}` : '-'
 }
 
 export const periods = {

@@ -98,7 +98,7 @@ class GameShowPage extends Component {
       <Container fluid className="text-center">
         <GamePageHeader
           teamName={this.props.game.team.name}
-          seasonName={this.props.game.season.name}
+          season={this.props.game.season}
           datetime={this.props.game.datetime}
           opponent={this.props.game.opponent}
           score={this.props.game.score}

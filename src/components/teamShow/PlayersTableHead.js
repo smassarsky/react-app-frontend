@@ -8,11 +8,11 @@ const PlayersTableHead = props => {
     <Row className="my-thead">
       <Col>Name</Col>
       <Col>Position</Col>
-      <Col>Jersey Number</Col>
-      <Col>Games Played</Col>
-      <Col>Goals</Col>
-      <Col>Assists</Col>
-      <Col>Points</Col>
+      <Col>Jersey</Col>
+      <Col>GP</Col>
+      <Col>G</Col>
+      <Col>A</Col>
+      <Col>P</Col>
       <Col>Actions</Col>
     </Row>
   )

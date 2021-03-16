@@ -2,9 +2,10 @@ import React from 'react'
 
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
 
-import { periods } from '../../../../../config'
+import { EditButton, DestroyButton } from 'components/buttons'
+
+import { periods } from 'config'
 
 const TBody = (props) => {
   return (
@@ -30,23 +31,14 @@ const TBody = (props) => {
   function renderActions(penalty) {
     return (
       <Col>
-        <Button
-          onClick={() => props.modalControls.showEditPenalty(penalty)}
-          className="mr-3"
-          type="button"
-          variant="primary"
-          size="sm"
-        >
-          Edit
-        </Button>
-        <Button
-          onClick={() => props.modalControls.showDestroyPenalty(penalty)}
-          type="button"
-          variant="danger"
-          size="sm"
-        >
-          Remove
-        </Button>
+        <EditButton
+          action={() => props.modalControls.showEditPenalty(penalty)}
+          title="Edit Penalty"
+        />
+        <DestroyButton
+          action={() => props.modalControls.showDestroyPenalty(penalty)}
+          title="Delete Penalty"
+        />
       </Col>
     )
   }

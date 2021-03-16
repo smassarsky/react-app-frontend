@@ -58,7 +58,7 @@ class SeasonShowPage extends Component {
       <Container fluid className="text-center">
 
         <SeasonPageHeader 
-          teamName={this.props.season.team.name} 
+          team={this.props.season.team} 
           seasonName={this.props.season.name}
         />
 
