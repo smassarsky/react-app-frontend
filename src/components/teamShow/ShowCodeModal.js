@@ -38,7 +38,7 @@ class ShowCodeModal extends Component {
               <Button
                 type="button"
                 variant="outline-secondary"
-                onClick={handleCopy}
+                onClick={this.handleCopy}
               >
                 <FontAwesomeIcon icon={faClipboard} />
               </Button>
