@@ -14,8 +14,24 @@ const TeamsHeader = props => {
         <h2 className="my-auto">Your Teams</h2>
       </div>
       
-      <Button onClick={props.showNewModal} variant="primary" type="button" size="sm" className="mr-3">Create Team</Button>
-      <Button variant="primary" type="button" size="sm">Join Team</Button>
+      <Button
+        onClick={props.showNewModal}
+        variant="primary"
+        type="button" size="sm"
+        className="mr-3"
+        >
+          Create Team
+      </Button>
+
+      <Button
+        onClick={props.showJoinModal}
+        variant="primary"
+        type="button"
+        size="sm"
+      >
+        Join Team
+      </Button>
+
     </div>
   )
 }

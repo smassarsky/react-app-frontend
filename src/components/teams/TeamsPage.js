@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-
 import Container from 'react-bootstrap/Container'
 
 import { teamActions } from '../../actions/teamActions'
@@ -11,6 +10,7 @@ import TeamsTable from './TeamsTable'
 import NewTeamModal from './NewTeamModal'
 import UpdateTeamModal from './UpdateTeamModal'
 import DestroyTeamModal from './DestroyTeamModal'
+import JoinTeamModal from './JoinTeamModal'
 import Alerts from '../Alerts'
 
 class TeamsPage extends Component {
@@ -18,7 +18,8 @@ class TeamsPage extends Component {
   state = {
     showNew: false,
     edit: { show: false, team: null },
-    destroy: { show: false, team: null }
+    destroy: { show: false, team: null },
+    showJoin: false
   }
 
   showNewModal = () => this.setState({showNew: true})
@@ -29,6 +30,9 @@ class TeamsPage extends Component {
 
   showDestroyModal = (team) => this.setState({ destroy: { show: true, team } })
   hideDestroyModal = () => this.setState({ destroy: { show: false, team: null } })
+
+  showJoinModal = () => this.setState({ showJoin: true })
+  hideJoinModal = () => this.setState({ showJoin: false })
 
   createTeam = (name) => {
     this.props.create(name)
@@ -52,7 +56,7 @@ class TeamsPage extends Component {
   render() {
     return (
       <Container fluid className="text-center">
-        <TeamsHeader showNewModal={this.showNewModal} />
+        <TeamsHeader showNewModal={this.showNewModal} showJoinModal={this.showJoinModal} />
         <Alerts />
 
         {this.props.teams.length > 0 ? 
@@ -80,6 +84,11 @@ class TeamsPage extends Component {
           hideModal={this.hideDestroyModal}
           team={this.state.destroy.team}
           destroyTeam={this.destroyTeam}
+        />
+
+        <JoinTeamModal
+          show={this.state.showJoin}
+          hide={this.hideJoinModal}
         />
 
       </Container>

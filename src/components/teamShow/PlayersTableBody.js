@@ -3,7 +3,7 @@ import React from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-import { ShowButton, EditButton, DestroyButton } from '../buttons'
+import { ShowButton, EditButton, DestroyButton, NewCodeButton, ShowCodeButton } from '../buttons'
 
 const PlayersTableBody = props => {
   return (
@@ -36,6 +36,7 @@ const PlayersTableBody = props => {
         />
         {props.owner ? 
           <>
+            {maybePlayerCodeButtons(player)}
             <EditButton
               action={() => props.modals.edit(player)}
               title="Edit Player"
@@ -48,6 +49,26 @@ const PlayersTableBody = props => {
         }
       </>
     )
+  }
+
+  function maybePlayerCodeButtons(player) {
+    if (player.playerCode) {
+      return (
+        <ShowCodeButton
+          action={() => props.modals.code(player.id)}
+          title="Show User Code"
+        />
+      )
+    } else if (!player.user) {
+      return (
+        <NewCodeButton
+          action={() => props.createCode(player)}
+          title='Create Code' 
+        />
+      )
+    } else {
+      return null
+    }
   }
 }
 

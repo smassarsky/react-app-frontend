@@ -1,4 +1,5 @@
-import { teamConstants } from '../constants'
+import { playerCodeConstants, teamConstants } from '../constants'
+import { playerCodeActions } from '../constants'
 
 const initialState = {
   details: {
@@ -164,6 +165,28 @@ export function team(state = initialState, action) {
       return {
         details: {
           ...state.details
+        }
+      }
+    case playerCodeConstants.CREATE_CODE_REQUEST:
+      return {
+        details: {
+          ...state.details,
+          fetchingCode: true
+        }
+      }
+    case playerCodeConstants.CREATE_CODE_SUCCESS:
+      return {
+        details: {
+          ...state.details,
+          players: state.details.players.map(player => player.id === action.playerId ? {...player, playerCode: action.playerCode } : player),
+          fetchingCode: false
+        }
+      }
+    case playerCodeConstants.CREATE_CODE_FAILURE:
+      return {
+        details: {
+          ...state.details,
+          fetchingCode: false
         }
       }
     default:

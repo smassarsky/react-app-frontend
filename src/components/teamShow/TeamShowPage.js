@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container'
 import { seasonActions } from '../../actions/seasonActions'
 import { playerActions } from '../../actions/playerActions'
 import { teamActions } from '../../actions/teamActions'
+import { playerCodeActions } from '../../actions/playerCodeActions'
 
 import TeamPageHeader from './TeamPageHeader'
 import Alerts from '../../components/Alerts'
@@ -24,6 +25,8 @@ import NewPlayerModal from './NewPlayerModal'
 import EditPlayerModal from './EditPlayerModal'
 import DestroyPlayerModal from './DestroyPlayerModal'
 
+import ShowCodeModal from './ShowCodeModal'
+
 
 class TeamShowPage extends Component {
 
@@ -34,7 +37,8 @@ class TeamShowPage extends Component {
     destroyPlayer: { show: false, player: null },
     showNewSeason: false,
     editSeason: { show: false, season: null },
-    destroySeason: { show: false, season: null }
+    destroySeason: { show: false, season: null },
+    code: { show: false, playerId: null }
   }
 
   
@@ -51,6 +55,9 @@ class TeamShowPage extends Component {
   hideEditSeason = () => this.setState({ editSeason: { show: false, season: null } })
   showDestroySeason = (season) => this.setState({ destroySeason: { show: true, season } })
   hideDestroySeason = () => this.setState({ destroySeason: { show: false, season: null } })
+
+  showCode = (playerId) => this.setState({ code: { show: true, playerId } })
+  hideCode = () => this.setState({ code: { show: false, playerId: null } })
 
   handleCreateSeason = (season) => {
     this.props.createSeason(this.props.team.id, season)
@@ -80,6 +87,14 @@ class TeamShowPage extends Component {
   handleDestroyPlayer = (playerId) => {
     this.props.destroyPlayer(playerId)
     this.hideDestroyPlayer()
+  }
+
+  handleCreateCode = player => {
+    this.props.createCode(player.id)
+    .then(() => {
+      this.showCode(player.id)
+    })
+    
   }
 
   componentDidMount() {
@@ -113,7 +128,8 @@ class TeamShowPage extends Component {
           <PlayersTable 
             players={this.props.team.players} 
             owner={this.props.owner} 
-            modals={ { edit: this.showEditPlayer, destroy: this.showDestroyPlayer } }
+            modals={ { edit: this.showEditPlayer, destroy: this.showDestroyPlayer, code: this.showCode } }
+            createCode={this.handleCreateCode}
             /> : <h4>No Players Yet</h4>
         }
 
@@ -158,6 +174,13 @@ class TeamShowPage extends Component {
           destroyPlayer={this.handleDestroyPlayer}
         />
 
+        <ShowCodeModal
+          show={this.state.code.show}
+          player={this.props.team.players.find(player => player.id === this.state.code.playerId)}
+          loading={this.props.fetchingCode}
+          hideModal={this.hideCode}
+        />
+
       </Container>
     )
   }
@@ -165,9 +188,11 @@ class TeamShowPage extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
     team: state.team.details,
-    owner: state.user.id === state.team.details.ownerId
+    owner: state.user.id === state.team.details.ownerId,
+    fetchingCode: state.team.details.fetchingCode
   }
 }
 
@@ -179,7 +204,8 @@ const mapDispatchToProps = dispatch => {
     destroySeason: (seasonId) => dispatch(seasonActions.destroy(seasonId)),
     createPlayer: (teamId, player) => dispatch(playerActions.create(teamId, player)),
     updatePlayer: (playerId, player) => dispatch(playerActions.update(playerId, player)),
-    destroyPlayer: (playerId) => dispatch(playerActions.destroy(playerId))
+    destroyPlayer: (playerId) => dispatch(playerActions.destroy(playerId)),
+    createCode: (playerId) => dispatch(playerCodeActions.create(playerId))
   }
 }
 
