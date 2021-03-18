@@ -16,6 +16,7 @@ class ShowCodeModal extends Component {
   }
 
   handleCopy = e => {
+    console.log(this.playerCode)
     this.playerCode.select()
     document.execCommand('copy')
     e.target.focus()
