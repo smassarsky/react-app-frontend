@@ -22,16 +22,16 @@ class ShowCodeModal extends Component {
   }
 
   render() {
-    console.log(props)
+    console.log(this.props)
     return (
-      <Modal show={props.show} onHide={props.hideModal} centered="true" >
+      <Modal show={this.props.show} onHide={this.props.hideModal} centered="true" >
         <Modal.Body>
-          <h6>Copy this code and send it to {props.player ? props.player.name : null}</h6>
+          <h6>Copy this code and send it to {this.props.player ? this.props.player.name : null}</h6>
           <InputGroup>
             <FormControl
               type="text"
               readOnly={true}
-              value={props.loading || !props.player ? "Loading..." : props.player.playerCode.code}
+              value={this.props.loading || !this.props.player ? "Loading..." : this.props.player.playerCode.code}
               ref={this.playerCode}
             />
             <InputGroup.Append>
