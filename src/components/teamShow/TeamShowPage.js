@@ -9,24 +9,13 @@ import { teamActions } from '../../actions/teamActions'
 import { playerCodeActions } from '../../actions/playerCodeActions'
 
 import TeamPageHeader from './TeamPageHeader'
-import Alerts from '../../components/Alerts'
+import Alerts from 'components/Alerts'
 
-import TeamSeasonsHeader from './TeamSeasonsHeader'
-import TeamPlayersHeader from './TeamPlayersHeader'
+import { SeasonsTable } from './SeasonsTable'
 
-import SeasonsTable from './SeasonsTable'
-import PlayersTable from './PlayersTable'
+import { PlayersTable } from './PlayersTable'
 
-import NewSeasonModal from './NewSeasonModal'
-import EditSeasonModal from './EditSeasonModal'
-import DestroySeasonModal from './DestroySeasonModal'
-
-import NewPlayerModal from './NewPlayerModal'
-import EditPlayerModal from './EditPlayerModal'
-import DestroyPlayerModal from './DestroyPlayerModal'
-
-import ShowCodeModal from './ShowCodeModal'
-
+import { Modals } from './Modals'
 
 class TeamShowPage extends Component {
 
@@ -94,7 +83,6 @@ class TeamShowPage extends Component {
     .then(() => {
       this.showCode(player.id)
     })
-    
   }
 
   componentDidMount() {
@@ -106,79 +94,71 @@ class TeamShowPage extends Component {
       <Container fluid className="text-center">
         <TeamPageHeader teamName={this.props.team.name} />
 
-        <TeamSeasonsHeader owner={this.props.owner} showModal={this.showNewSeason} />
         <Alerts />
 
-        { this.props.team.seasons.length > 0 ?
-          <SeasonsTable 
-            seasons={this.props.team.seasons} 
-            owner={this.props.owner} 
-            modals={ { edit: this.showEditSeason, destroy: this.showDestroySeason } }
-          /> : <h4>No Seasons Yet</h4>
-        }
-
-        <TeamPlayersHeader 
-          owner={this.props.owner} 
-          showModal={this.showNewPlayer} 
+        <SeasonsTable
+          owner={this.props.owner}
+          seasons={this.props.team.seasons}
+          modals={ {
+            new: this.showNewSeason,
+            edit: this.showEditSeason,
+            destroy: this.showDestroySeason
+          } }
         />
 
-        <Alerts />
-
-        { this.props.team.players.length > 0 ?
-          <PlayersTable 
-            players={this.props.team.players} 
-            owner={this.props.owner} 
-            modals={ { edit: this.showEditPlayer, destroy: this.showDestroyPlayer, code: this.showCode } }
-            createCode={this.handleCreateCode}
-            /> : <h4>No Players Yet</h4>
-        }
-
-        <NewSeasonModal
-          show={this.state.showNewSeason}
-          hideModal={this.hideNewSeason}
-          createSeason={this.handleCreateSeason}
+        <PlayersTable
+          owner={this.props.owner}
+          players={this.props.team.players}
+          createCode={this.handleCreateCode}
+          modals={ {
+            new: this.showNewPlayer,
+            edit: this.showEditPlayer,
+            destroy: this.showDestroyPlayer,
+            code: this.showCode
+          } }
         />
 
-        <EditSeasonModal
-          show={this.state.editSeason.show}
-          season={this.state.editSeason.season}
-          hideModal={this.hideEditSeason}
-          updateSeason={this.handleUpdateSeason}
-        />
-
-        <DestroySeasonModal
-          show={this.state.destroySeason.show}
-          season={this.state.destroySeason.season}
-          hideModal={this.hideDestroySeason}
-          destroySeason={this.handleDestroySeason}
-        />
-
-
-        <NewPlayerModal
-          show={this.state.showNewPlayer}
-          hideModal={this.hideNewPlayer}
-          createPlayer={this.handleCreatePlayer}
-        />
-
-        <EditPlayerModal
-          show={this.state.editPlayer.show}
-          player={this.state.editPlayer.player}
-          hideModal={this.hideEditPlayer}
-          updatePlayer={this.handleUpdatePlayer}
-        />
-
-        <DestroyPlayerModal
-          show={this.state.destroyPlayer.show}
-          player={this.state.destroyPlayer.player}
-          hideModal={this.hideDestroyPlayer}
-          destroyPlayer={this.handleDestroyPlayer}
-        />
-
-        <ShowCodeModal
-          show={this.state.code.show}
-          player={this.props.team.players.find(player => player.id === this.state.code.playerId)}
-          loading={this.props.fetchingCode}
-          hideModal={this.hideCode}
+        <Modals
+          newSeason={ {
+            show: this.state.showNewSeason,
+            hide: this.hideNewSeason,
+            action: this.handleCreateSeason
+          } }
+          editSeason={ {
+            show: this.state.editSeason.show,
+            hide: this.hideEditSeason,
+            action: this.handleUpdateSeason,
+            season: this.state.editSeason.season
+          } }
+          destroySeason={ {
+            show: this.state.destroySeason.show,
+            hide: this.hideDestroySeason,
+            action: this.handleDestroySeason,
+            season: this.state.destroySeason.season
+          } }
+          newPlayer={ {
+            show: this.state.showNewPlayer,
+            hide: this.hideNewPlayer,
+            action: this.handleCreatePlayer
+          } }
+          editPlayer={ {
+            show: this.state.editPlayer.show,
+            hide: this.hideEditPlayer,
+            action: this.handleUpdatePlayer,
+            player: this.state.editPlayer.player
+          } }
+          destroyPlayer={ {
+            show: this.state.destroyPlayer.show,
+            hide: this.hideDestroyPlayer,
+            action: this.handleDestroyPlayer,
+            player: this.state.destroyPlayer.player
+          } }
+          showCode={ {
+            show: this.state.code.show,
+            hide: this.hideCode,
+            player: this.props.team.players.find(player => player.id === this.state.code.playerId),
+            loading: this.props.fetchingCode
+          } }
         />
 
       </Container>

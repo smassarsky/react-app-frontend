@@ -1,5 +1,5 @@
 import { gameConstants } from '../constants'
-import { sortEvents } from '../config'
+import { sortEvents } from 'config'
 
 const initialState = {
   details: {

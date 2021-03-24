@@ -1,4 +1,5 @@
 import { seasonConstants } from '../constants'
+import { sortGames } from 'config'
 
 const initialState = {
   details: {
@@ -48,7 +49,7 @@ export function season(state = initialState, action) {
       return {
         details: {
           ...state.details,
-          games: state.details.games.map(game => game.id === action.game.id ? action.game : game)
+          games: sortGames(state.details.games.map(game => game.id === action.game.id ? action.game : game))
         }
       }
     case seasonConstants.UPDATE_GAME_FAILURE:

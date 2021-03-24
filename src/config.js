@@ -1,5 +1,5 @@
-// const baseUrl = 'http://localhost:8000'
-const baseUrl = 'https://polar-savannah-87773.herokuapp.com'
+const baseUrl = 'http://localhost:8000'
+// const baseUrl = 'https://polar-savannah-87773.herokuapp.com'
 
 export const config = {
   baseUrl
@@ -154,6 +154,18 @@ export function sortEvents(events) {
       } else {
         return 0
       }
+    }
+  })
+}
+
+export function sortGames(games) {
+  return games.sort((a, b) => {
+    if (a.datetime > b.datetime) {
+      return 1
+    } else if (a.datetime < b.datetime) {
+      return -1
+    } else {
+      return 0
     }
   })
 }

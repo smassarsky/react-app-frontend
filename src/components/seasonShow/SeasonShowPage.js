@@ -7,16 +7,11 @@ import { seasonActions } from '../../actions/seasonActions'
 import { gameActions } from '../../actions/gameActions'
 
 import SeasonPageHeader from './SeasonPageHeader'
-import Alerts from '../../components/Alerts'
 
-import SeasonGamesHeader from './SeasonGamesHeader'
-
-import GamesTable from './GamesTable'
+import { GamesTable } from './GamesTable'
 import { PlayersTable } from './PlayersTable'
 
-import NewGameModal from './NewGameModal'
-import EditGameModal from './EditGameModal'
-import DestroyGameModal from './DestroyGameModal'
+import { Modals } from './Modals'
 
 class SeasonShowPage extends Component {
 
@@ -62,43 +57,40 @@ class SeasonShowPage extends Component {
           seasonName={this.props.season.name}
         />
 
-        <SeasonGamesHeader
+
+
+        <GamesTable
           owner={this.props.owner}
-          showNewGame={this.showNewGame}
+          games={this.props.season.games}
+          modals={ {
+            new: this.showNewGame,
+            edit: this.showEditGame,
+            destroy: this.showDestroyGame
+          } }
         />
-
-        <Alerts />
-
-        { this.props.season.games.length > 0 ?
-          <GamesTable
-            games={this.props.season.games}
-            owner={this.props.owner}
-            modals={ { edit: this.showEditGame, destroy: this.showDestroyGame } }
-          /> : <h4>No Games Yet</h4>
-        }
 
         <PlayersTable 
           players={this.props.season.playersList || []}
         />
 
-        <NewGameModal
-          show={this.state.newGame}
-          hideModal={this.hideNewGame}
-          createGame={this.handleCreateGame}
-        />
-
-        <EditGameModal
-          show={this.state.editGame.show}
-          game={this.state.editGame.game}
-          hideModal={this.hideEditGame}
-          updateGame={this.handleUpdateGame}
-        />
-
-        <DestroyGameModal
-          show={this.state.destroyGame.show}
-          game={this.state.destroyGame.game}
-          hideModal={this.hideDestroyGame}
-          destroyGame={this.handleDestroyGame}
+        <Modals
+          new={ {
+            show: this.state.newGame,
+            hide: this.hideNewGame,
+            action: this.handleCreateGame
+          } }
+          edit={ {
+            show: this.state.editGame.show,
+            hide: this.hideEditGame,
+            action: this.handleUpdateGame,
+            game: this.state.editGame.game
+          } }
+          destroy={ {
+            show: this.state.destroyGame.show,
+            hide: this.hideDestroyGame,
+            action: this.handleDestroyGame,
+            game: this.state.destroyGame.game
+          } }
         />
 
       </Container>

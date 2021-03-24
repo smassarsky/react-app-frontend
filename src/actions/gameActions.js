@@ -5,6 +5,11 @@ import { gameConstants } from '../constants'
 import { gameService } from '../_services/gameService'
 import { alertActions } from './alertActions'
 
+import { dateParser } from 'config'
+
+import * as dayjs from 'dayjs'
+import * as utc from 'dayjs/plugin/utc'
+
 export const gameActions = {
   show,
   create,
@@ -39,6 +44,8 @@ function create(seasonId, gameParams) {
     dispatch(request())
     dispatch(alertActions.clear())
 
+    gameParams.datetime = new Date(gameParams.datetime).toISOString()
+
     gameService.create(seasonId, gameParams)
       .then(
         game => {
@@ -61,6 +68,8 @@ function update(game) {
   return dispatch => {
     dispatch(request())
     dispatch(alertActions.clear())
+
+    game.datetime = new Date(game.datetime).toISOString()
 
     gameService.update(game)
       .then(

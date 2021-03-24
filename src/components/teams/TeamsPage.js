@@ -5,13 +5,9 @@ import Container from 'react-bootstrap/Container'
 
 import { teamActions } from '../../actions/teamActions'
 
-import TeamsHeader from './TeamsHeader'
-import TeamsTable from './TeamsTable'
-import NewTeamModal from './NewTeamModal'
-import UpdateTeamModal from './UpdateTeamModal'
-import DestroyTeamModal from './DestroyTeamModal'
-import JoinTeamModal from './JoinTeamModal'
-import Alerts from '../Alerts'
+import { Modals } from './Modals'
+
+import { TeamsTable } from './TeamsTable'
 
 class TeamsPage extends Component {
 
@@ -56,39 +52,40 @@ class TeamsPage extends Component {
   render() {
     return (
       <Container fluid className="text-center">
-        <TeamsHeader showNewModal={this.showNewModal} showJoinModal={this.showJoinModal} />
-        <Alerts />
 
-        {this.props.teams.length > 0 ? 
-          <TeamsTable 
-            teams={this.props.teams} 
-            modals={ {edit: this.showEditModal, destroy: this.showDestroyModal} }
-          /> : <h4>No Teams Yet</h4>
-        }
-
-        <NewTeamModal 
-          show={this.state.showNew} 
-          hideModal={this.hideNewModal} 
-          createTeam={this.createTeam}
+        <TeamsTable
+          teams={this.props.teams}
+          modals={ {
+            new: this.showNewModal,
+            edit: this.showEditModal,
+            destroy: this.showDestroyModal,
+            join: this.showJoinModal
+          } }
+          userId={this.props.userId}
         />
 
-        <UpdateTeamModal 
-          show={this.state.edit.show}
-          hideModal={this.hideEditModal}
-          team={this.state.edit.team}
-          updateTeam={this.updateTeam}
-        />
-
-        <DestroyTeamModal 
-          show={this.state.destroy.show}
-          hideModal={this.hideDestroyModal}
-          team={this.state.destroy.team}
-          destroyTeam={this.destroyTeam}
-        />
-
-        <JoinTeamModal
-          show={this.state.showJoin}
-          hide={this.hideJoinModal}
+        <Modals
+          newTeam={ {
+            show: this.state.showNew,
+            hide: this.hideNewModal,
+            action: this.createTeam
+          } }
+          updateTeam={ {
+            show: this.state.edit.show,
+            hide: this.hideEditModal,
+            action: this.updateTeam,
+            team: this.state.edit.team
+          } }
+          destroyTeam={ {
+            show: this.state.destroy.show,
+            hide: this.hideDestroyModal,
+            action: this.destroyTeam,
+            team: this.state.destroy.team
+          } }
+          joinTeam={ {
+            show: this.state.showJoin,
+            hide: this.hideJoinModal
+          } }
         />
 
       </Container>
@@ -99,7 +96,8 @@ class TeamsPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    teams: state.teams.list
+    teams: state.teams.list,
+    userId: state.user.id
   }
 }
 
