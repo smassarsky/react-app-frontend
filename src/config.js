@@ -1,5 +1,5 @@
-const baseUrl = 'http://localhost:8000'
-// const baseUrl = 'https://polar-savannah-87773.herokuapp.com'
+// const baseUrl = 'http://localhost:8000'
+const baseUrl = 'https://polar-savannah-87773.herokuapp.com'
 
 export const config = {
   baseUrl
