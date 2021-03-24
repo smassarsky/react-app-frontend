@@ -168,7 +168,6 @@ class TeamShowPage extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     team: state.team.details,
     owner: state.user.id === state.team.details.ownerId,

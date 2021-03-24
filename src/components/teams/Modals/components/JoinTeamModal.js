@@ -23,7 +23,6 @@ class JoinTeamModal extends Component {
     playerCodeService.show(this.state.code)
       .then(
         (playerCode) => {
-          console.log(playerCode)
           this.setState({ playerCode })
         },
         error => {

@@ -3,10 +3,13 @@ import { alertActions } from './alertActions'
 import { userService } from '../_services'
 import { history } from '../_helpers/history'
 
+import camelcaseKeys from 'camelcase-keys'
+
 export const userActions = {
   signup,
   login,
-  logout
+  logout,
+  dashboard
 }
 
 function signup(fields) {
@@ -63,4 +66,26 @@ function logout() {
     userService.logout()
       .then(() => history.push('/'))
   }
+}
+
+function dashboard() {
+  return dispatch => {
+    dispatch(request())
+    dispatch(alertActions.clear())
+
+    userService.dashboard()
+      .then(
+        respJson => {
+          dispatch(success(camelcaseKeys(respJson)))
+        },
+        error => {
+          dispatch(failure())
+          dispatch(alertActions.error(error))
+        }
+      )
+  }
+
+  function request() { return { type: userConstants.DASHBOARD_REQUEST } }
+  function success(resp) { return { type: userConstants.DASHBOARD_SUCCESS, resp } }
+  function failure() { return { type: userConstants.DASHBOARD_FAILURE } }
 }

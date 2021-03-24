@@ -117,7 +117,6 @@ class EditGoal extends Component {
   }
 
   render() {
-    console.log(this.state, !!this.state.team, !!this.state.team.id)
     return (
       <Modal show={this.props.show} onHide={this.handleHide} centered="true">
         <Modal.Body>
@@ -132,7 +131,6 @@ class EditGoal extends Component {
                   as="select"
                   name="team"
                   value={this.state.team.id}
-                  
                 >
                   {this.renderTeams()}
                 </Form.Control>

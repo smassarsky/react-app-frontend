@@ -5,11 +5,6 @@ import { gameConstants } from '../constants'
 import { gameService } from '../_services/gameService'
 import { alertActions } from './alertActions'
 
-import { dateParser } from 'config'
-
-import * as dayjs from 'dayjs'
-import * as utc from 'dayjs/plugin/utc'
-
 export const gameActions = {
   show,
   create,

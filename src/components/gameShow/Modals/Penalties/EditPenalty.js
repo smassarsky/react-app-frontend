@@ -14,9 +14,7 @@ class EditPenalty extends Component {
   state = editPenaltyInitialState
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps, this.props, prevProps === this.props, this.state)
     if (this.props.penalty && prevProps.penalty !== this.props.penalty) {
-      console.log('hi again')
       const { period, time, infraction, length } = this.props.penalty
       const player = this.props.penalty.player || {}
       const team = this.props.penalty.team || {}
@@ -95,7 +93,6 @@ class EditPenalty extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <Modal show={this.props.show} onHide={this.handleHide} centered="true">
         <Modal.Body>

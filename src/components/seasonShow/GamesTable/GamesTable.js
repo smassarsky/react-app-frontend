@@ -11,6 +11,7 @@ const GamesTable = props => {
         owner={props.owner}
         showNew={props.modals.new}
       />
+      <Alerts />
       {props.games.length > 0 ? renderTable() : <h4>No Games Yet</h4>}
     </>
   )

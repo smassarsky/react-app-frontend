@@ -93,7 +93,6 @@ class GameShowPage extends Component {
   }
 
   render() {
-    console.log(this.props.owner)
     return (
       <Container fluid className="text-center">
         <GamePageHeader
@@ -199,13 +198,9 @@ class GameShowPage extends Component {
       </Container>
     )
   }
-
-
-
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     game: state.game.details,
     owner: state.user.id === state.game.details.owner.id

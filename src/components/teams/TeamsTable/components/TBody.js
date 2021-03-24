@@ -22,7 +22,6 @@ const TeamsTableBody = props => {
   )
 
   function renderRow(team) {
-    console.log(team)
     return ( 
       <Row key={team.id} className="my-tbody">
         <Col>{team.name}</Col>

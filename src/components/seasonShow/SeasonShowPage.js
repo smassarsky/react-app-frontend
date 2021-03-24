@@ -101,7 +101,6 @@ class SeasonShowPage extends Component {
 
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     season: state.season.details,
     owner: state.user.id === state.season.details.team.ownerId

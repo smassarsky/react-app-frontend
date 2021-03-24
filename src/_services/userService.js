@@ -3,8 +3,8 @@ import { config } from '../config'
 export const userService = {
   login,
   signup,
-  logout, 
-  currentUser
+  logout,
+  dashboard
 }
 
 function login(username, password) {
@@ -43,8 +43,9 @@ function logout() {
   return fetch(`${config.baseUrl}/logout`, options)
 }
 
-function currentUser() {
-  
+function dashboard() {
+  return fetch(`${config.baseUrl}/dashboard`, {credentials: 'include'})
+    .then(handleResponse)
 }
 
 function handleResponse(response) {
@@ -56,19 +57,3 @@ function handleResponse(response) {
     return json
   })
 }
-
-// function handleResponse(response) {
-//   return response.text().then(text => {
-//       const data = text && JSON.parse(text);
-//       if (!response.ok) {
-//           if (response.status === 401) {
-//               logout();
-//           }
-
-//           const error = (data && data.message) || response.statusText;
-//           return Promise.reject(error);
-//       }
-
-//       return data;
-//   });
-// }

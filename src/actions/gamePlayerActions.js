@@ -10,7 +10,6 @@ export const gamePlayerActions = {
 }
 
 function add(gameId, playerId, isUser) {
-  console.log(isUser)
   return dispatch => {
     dispatch(request())
     dispatch(alertActions.clear())

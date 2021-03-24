@@ -1,13 +1,15 @@
 import React from 'react'
 
+import Col from 'react-bootstrap/Col'
+
 import { THead, TBody } from './components'
 
 const GoalsTable = (props) => {
   return (
-    <div className="mt-3">
+    <Col className="mt-3">
       <h4>Goals</h4>
       { props.goals.length > 0 ? renderTable() : <h6>No Goals</h6>}
-    </div>
+    </Col>
   )
 
   function renderTable() {

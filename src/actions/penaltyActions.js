@@ -47,8 +47,6 @@ function update(penalty) {
     dispatch(request())
     dispatch(alertActions.clear())
 
-    console.log(penalty)
-
     const penaltyOut = {
       id: penalty.penaltyId,
       teamId: penalty.team ? penalty.team.id : null,

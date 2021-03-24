@@ -50,7 +50,6 @@ function setScorer(prevState, playerId, players) {
 }
 
 function addAssist(prevState, playerId, players) {
-  console.log(prevState)
   const outPlayer = players.find(player => player.id === playerId)
 
   let errors = { assistPlayers: '' }
@@ -70,8 +69,6 @@ function addAssist(prevState, playerId, players) {
   if (prevState.assistPlayers.find(player => player.id === playerId)) {
     errors.assistPlayers += "Player cannot assist goal twice."
   }
-
-  console.log(errors)
 
   if (errors.assistPlayers === '') {
     const newOnIcePlayers = prevState.onIcePlayers.find(player => player.id === playerId) ? prevState.onIcePlayers : [...prevState.onIcePlayers, outPlayer]
@@ -120,7 +117,6 @@ function addOnIce(prevState, playerId, players) {
 function removeOnIce(prevState, playerId) {
   let errors = { onIcePlayers: '' }
 
-  console.log(prevState)
   if (prevState.player.id && prevState.player.id === playerId) {
     errors.onIcePlayers += "Cannot remove - player scored goal."
   }

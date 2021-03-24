@@ -2,7 +2,6 @@ import React from 'react'
 import { Header, THead, TBody } from './components'
 
 const PlayersTable = props => {
-  console.log(props.players)
   return (
     <div className="my-3">
       <Header />

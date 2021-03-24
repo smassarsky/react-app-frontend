@@ -16,14 +16,12 @@ class ShowCodeModal extends Component {
   }
 
   handleCopy = e => {
-    console.log(this.playerCode)
     this.playerCode.current.select()
     document.execCommand('copy')
     e.target.focus()
   }
 
   render() {
-    console.log(this.props)
     return (
       <Modal show={this.props.show} onHide={this.props.hide} centered="true" >
         <Modal.Body>

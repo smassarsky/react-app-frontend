@@ -1,5 +1,4 @@
 import { playerCodeConstants, teamConstants } from '../constants'
-import { playerCodeActions } from '../constants'
 
 const initialState = {
   details: {

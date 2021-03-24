@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Row from 'react-bootstrap/Row'
+
 import { GoalsTable } from './GoalsTable'
 import { PenaltiesTable } from './PenaltiesTable'
 import GameEventsHeader from './GameEventsHeader'
@@ -15,26 +17,28 @@ const GameEvents = (props) => {
         } }
         owner={props.owner}
       />
+      
+      <Row>
+        <GoalsTable
+          goals={props.goals}
+          owner={props.owner}
+          opponent={props.opponent}
+          modalControls={ {
+            showEditGoal: props.modalControls.showEditGoal,
+            showDestroyGoal: props.modalControls.showDestroyGoal
+          } }
+        />
 
-      <GoalsTable
-        goals={props.goals}
-        owner={props.owner}
-        opponent={props.opponent}
-        modalControls={ {
-          showEditGoal: props.modalControls.showEditGoal,
-          showDestroyGoal: props.modalControls.showDestroyGoal
-        } }
-      />
-
-      <PenaltiesTable
-        penalties={props.penalties}
-        owner={props.owner}
-        opponent={props.opponent}
-        modalControls={ {
-          showEditPenalty: props.modalControls.showEditPenalty,
-          showDestroyPenalty: props.modalControls.showDestroyPenalty
-        } }
-      />
+        <PenaltiesTable
+          penalties={props.penalties}
+          owner={props.owner}
+          opponent={props.opponent}
+          modalControls={ {
+            showEditPenalty: props.modalControls.showEditPenalty,
+            showDestroyPenalty: props.modalControls.showDestroyPenalty
+          } }
+        />
+      </Row>
 
     </div>
   )

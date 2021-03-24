@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col'
 import { ShowButton } from 'components/buttons'
 
 const TBody = props => {
-  console.log(props.players)
   return (
     <>
       {props.players.map(player => renderRow(player))}

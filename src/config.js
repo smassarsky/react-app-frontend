@@ -169,3 +169,16 @@ export function sortGames(games) {
     }
   })
 }
+
+export function dateTimeToEdit(datetime) {
+  let temp = new Date(datetime)
+  return (
+    '' + 
+    temp.getFullYear() + '-' +
+    String(temp.getMonth() + 1).padStart(2, 0) + '-' +
+    String(temp.getDate()).padStart(2, 0) + 'T' +
+    String(temp.getHours()).padStart(2, 0) + ':' +
+    String(temp.getMinutes()).padStart(2, 0) + ':' +
+    String(temp.getSeconds()).padStart(2, 0)
+  )
+}

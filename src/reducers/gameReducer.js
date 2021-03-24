@@ -342,7 +342,6 @@ export function game(state = initialState, action) {
       if (action.penalty.team || penaltyToUpdate.team) {
         updatePenaltyPlayersList = state.details.playersList.map(player => {
           let updatePlayerPim = player.stats.pim
-          console.log(player, updatePlayerPim)
           if (penaltyToUpdate.player && penaltyToUpdate.player.id === player.id) {
             updatePlayerPim -= penaltyToUpdate.length
           }
@@ -429,7 +428,6 @@ export function game(state = initialState, action) {
         addPlayerFetch: true
       }
     case gameConstants.ADD_PLAYER_SUCCESS:
-      console.log(state, action)
       return {
         details: {
           ...state.details,
@@ -452,7 +450,6 @@ export function game(state = initialState, action) {
         removePlayerFetch: true
       }
     case gameConstants.REMOVE_PLAYER_SUCCESS:
-      console.log(state, action)
       return {
         details: {
           ...state.details,

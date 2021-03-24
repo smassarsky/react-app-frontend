@@ -17,7 +17,7 @@ const PlayerStats = props => {
     return (
       <>
         <THead
-          owner={props}
+          owner={props.owner}
         />
         <TBody
           owner={props.owner}

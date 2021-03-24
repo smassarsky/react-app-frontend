@@ -5,7 +5,6 @@ import { BackButton } from 'components/buttons'
 import { dateParser, formatScore } from '../../config'
 
 const GamePageHeader = props => {
-  console.log(props)
   return (
     <div className="my-3">
       <div className="mb-2 d-flex justify-content-center align-items-center">

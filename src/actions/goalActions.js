@@ -2,7 +2,6 @@ import camelcaseKeys from 'camelcase-keys'
 
 import { gameConstants } from '../constants'
 import { goalService } from '../_services/goalService'
-import { goalValidations } from '../_validators/goalValidators'
 import { alertActions } from './alertActions'
 
 export const goalActions = {
@@ -16,9 +15,6 @@ function create(gameId, goal) {
     dispatch(request())
     dispatch(alertActions.clear())
 
-    console.log(goal)
-
-
     const goalOut = {
       teamId: goal.team ? goal.team.id : null,
       playerId: goal.player ? goal.player.id : null,
@@ -31,7 +27,6 @@ function create(gameId, goal) {
     goalService.create(gameId, goalOut)
       .then(
         goal => {
-          console.log(goal)
           dispatch(success(camelcaseKeys(goal, { deep: true })))
           dispatch(alertActions.success("GoalCreated"))
         },
@@ -52,8 +47,6 @@ function update(goal) {
     dispatch(request())
     dispatch(alertActions.clear())
 
-    console.log(goal)
-
     const goalOut = {
       id: goal.goalId,
       teamId: goal.team.id === {} ? null : goal.team.id,
@@ -63,8 +56,6 @@ function update(goal) {
       period: goal.period,
       time: `${goal.minutes}`.padStart(2, '0') + ':' + `${goal.seconds}`.padStart(2, '0')
     }
-
-    console.log(goalOut)
 
     goalService.update(goalOut)
       .then(

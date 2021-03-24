@@ -4,7 +4,6 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
 const DestroyPenalty = props => {
-  console.log(props)
   return (
     <Modal show={props.show} onHide={props.hide} centered="true">
       <Modal.Body className="text-center">

@@ -5,6 +5,7 @@ import { alert } from './alertReducer'
 import { team } from './teamReducer'
 import { season } from './seasonReducer'
 import { game } from './gameReducer'
+import { dashboard } from './dashboardReducer'
 
 const rootReducer = combineReducers({
   user,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   teams,
   team,
   season,
-  game
+  game,
+  dashboard
 })
 
 export default rootReducer

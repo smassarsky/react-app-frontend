@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 
-import { editGameInitialState, editPlayerInitialState } from 'config'
+import { editGameInitialState, editPlayerInitialState, dateTimeToEdit } from 'config'
 
 
 class EditGameModal extends Component {
@@ -15,7 +15,7 @@ class EditGameModal extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.game !== this.props.game) {
       let { id, datetime, opponent, place, status } = this.props.game || {...editGameInitialState}
-      datetime = datetime.split(':').slice(0, -1).join(':')
+      datetime = dateTimeToEdit(datetime)
       this.setState({ id, datetime, opponent, place, status })
     }
   }

@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 
 import Navbar from '../components/Navbar'
 
-import Dashboard from '../components/Dashboard'
+import { Dashboard } from '../components/Dashboard'
 import TeamsPage from '../components/teams/TeamsPage'
 import TeamShowPage from '../components/teamShow/TeamShowPage'
 import SeasonShowPage from '../components/seasonShow/SeasonShowPage'
