@@ -5,6 +5,6 @@ This is the frontend for an application where a hockey team can keep track of th
 [Demo Link](http://intense-scrubland-75230.herokuapp.com/)
 *Please allow a moment for the Heroku server to spin up, once on first visit and again on login / signup.
 
-[Backend Repo](https://github.com/smassarsky/react-app-api)
+[Frontend Repo](https://github.com/smassarsky/react-app-api)
 
 [LinkedIn](https://www.linkedin.com/in/seth-massarsky/)
