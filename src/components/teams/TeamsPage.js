@@ -9,6 +9,8 @@ import { Modals } from './Modals'
 
 import { TeamsTable } from './TeamsTable'
 
+import Counter from './Counter'
+
 class TeamsPage extends Component {
 
   state = {
@@ -87,6 +89,8 @@ class TeamsPage extends Component {
             hide: this.hideJoinModal
           } }
         />
+
+        <Counter />
 
       </Container>
     )
